@@ -12,7 +12,7 @@ function generateChapter(fileName) {
     shortTitle: fileName.substring(fileName.indexOf('.') + 1, fileName.lastIndexOf('.')),
     title: mdutils.getHeader(fileName),
   };
-  chapter.contentWithoutHeader = chapter.content.substring('\n') + 1;
+  chapter.contentWithoutHeader = mdutils.parseWithoutHeader(fileName);
   return chapter;
 
 }
@@ -21,6 +21,7 @@ module.exports.generateLab = function () {
 
   var lab = {
     title: '',
+    icon: 'lab',
     chapters: [],
     mdFiles: futils.getFiles('*.md'),
     directories: futils.getDirectories('.'),
@@ -32,8 +33,11 @@ module.exports.generateLab = function () {
     lab.chapters.push(generateChapter(fileName));
   });
   lab.title = lab.chapters[0].shortTitle;
+  lab.link = lab.folderName + '/index.html';
+  lab.objectives = lab.chapters[0].content;
+  lab.objectivesWithoutHeader = lab.chapters[0].contentWithoutHeader;
+  lab.imgPath = lab.folderName + '/img/main.png';
   return lab;
-
 };
 
 module.exports.publishLab = function (lab) {

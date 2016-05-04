@@ -3,6 +3,8 @@
 const glob = require('glob-promise');
 const labs = require('./labs');
 const topics = require('./topics');
+const courses = require('./course');
+
 const nunjucks = require('nunjucks');
 
 const root = __dirname;
@@ -12,6 +14,8 @@ nunjucks.installJinjaCompat();
 glob('course.md').then(files => {
   if (files.length == 1) {
     console.log('Publishing course');
+    const course = courses.generateCourse();
+    courses.publishCourse(course);
   } else {
     glob('topic.md').then(files => {
       if (files.length == 1) {

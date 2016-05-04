@@ -1,4 +1,4 @@
-#macro card (type, contentLink, imgLink, title, objectives, videoLink)
+{% macro card (type, contentLink, imgLink, title, objectives) %}
   <div class="ui card">
     <div class="content">
         <div class="right floated meta"> <i class="{{type}} large icon"></i></div>
@@ -12,13 +12,5 @@
          {{objectives}}
       </div>
     </div>
-    #if videoLink
-      <div class="extra content">
-     <!--   <div class="ui embed" data-url="{{videoLink}}">
-        </div> -->
-        <iframe src="{{videoLink}}" frameborder="0" allowfullscreen></iframe>
-      </div>
-    #endif
   </div>
-
-#endmacro
+{% endmacro %}

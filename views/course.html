@@ -1,14 +1,18 @@
-# extends "main.html"
-# block content
+{% import "partials/header.html" as header %}
+{% import "partials/card.html" as card %}
 
-{{ header("#", "sitemap", course.title, "Topics") }}
+{% extends "main.html" %}
+{% block content %}
+
+{{ header.header("#", "sitemap", title, "Topics") }}
+
 
 <div class="ui four doubling stackable cards">
 
-# for topic in course.topicList
-  {{ card ("sitemap", "./" + topic.folder + "/index.html", "./" + topic.folder + "/" + topic.topicImg, topic.title, topic.contentWithoutHeadder) }}
-# endfor
+  {% for topic in topics %}
+  {{ card.card ("sitemap", "./" + topic.topicFolder + "/index.html", "./" + topic.topicFolder + "/" + topic.img, topic.title, topic.contentWithoutHeadder) }}
+  {% endfor %}
 
 </div>
 
-# endblock
+{% endblock %}

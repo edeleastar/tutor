@@ -12,7 +12,21 @@ module.exports.parse = function (fileName) {
   return marked(filtered2);
 };
 
-module.exports.getHeader = function (fileName) {
+module.exports.parseWithoutHeader = function (fileName) {
   var array = fs.readFileSync(fileName).toString().split('\n');
-  return array[0].substring(1);
+  array.shift();
+  var res = array.join();
+  return marked(res);
+};
+
+module.exports.getHeader = function (fileName) {
+  var header = '';
+  var array = fs.readFileSync(fileName).toString().split('\n');
+  if (array[0][0] === '#') {
+    header = array[0].substring(1);
+  } else {
+    header = array[0];
+  }
+
+  return header;
 };

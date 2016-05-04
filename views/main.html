@@ -25,18 +25,16 @@
 
   <body>
 
-    # from  "partials/header.html" import header  as header
-    # from  "partials/topicheader.html" import topicheader  as topicheader
-    # from  "partials/card.html" import card  as card
+    {% import "partials/header.html"  as header %}
+
+
 
   <div class="ui container">
     {% block content %}
     {% endblock %}
    </div>
 
-
-    {% include  "partials/credits.html" %}
-
+   {% include  "partials/credits.html" %}
 
     <script>
       {% include "js/main.js" %}

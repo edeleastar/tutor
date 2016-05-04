@@ -1,15 +1,17 @@
-# extends "main.html"
-# block content
+{% import "partials/topicheader.html" as topicheader %}
+{% import "partials/card.html" as card %}
 
-{{ topicheader("../index.html", "glyphicon-chevron-left", topic.title) }}
+{% extends "main.html" %}
+{% block content %}
+
+{{ topicheader.topicheader("../index.html", "glyphicon-chevron-left", title) }}
 
 <div class="ui four doubling stackable cards">
-  #for resource in talks
-    {{ card ("film", resource.link, resource.imgPath, resource.title, resource.objectivesWithoutHeadder, resource.videoLink) }}
-  #endfor
 
-  #for resource in labs
-    {{ card ("lab", resource.link, resource.imgPath, resource.title, resource.objectivesWithoutHeadder) }}
-  #endfor
-  </div>
-# endblock 
+  {% for resource in resources %}
+  {{ card.card (resource.icon, resource.link, resource.imgPath, resource.title, resource.objectivesWithoutHeader) }}
+  {% endfor %}
+
+</div>
+
+{% endblock %}
