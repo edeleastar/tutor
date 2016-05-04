@@ -1,7 +1,13 @@
 'use strict';
 
 const glob = require('glob-promise');
-const generateLab = require('./lab');
+const labs = require('./labs');
+const topics = require('./topics');
+const nunjucks = require('nunjucks');
+
+const root = __dirname;
+nunjucks.configure(root + '/views', { autoescape: false });
+nunjucks.installJinjaCompat();
 
 glob('course.md').then(files => {
   if (files.length == 1) {
@@ -10,10 +16,12 @@ glob('course.md').then(files => {
     glob('topic.md').then(files => {
       if (files.length == 1) {
         console.log('Publishing topic');
+        const topic = topics.generateTopic();
+        topics.publishTopic(topic);
       } else {
         console.log('Publishing lab');
-        const lab = generateLab();
-        console.log(lab);
+        const lab = labs.generateLab();
+        labs.publishLab(lab);
       }
     });
   }

@@ -1,0 +1,41 @@
+{% extends "main.html" %}
+{% block content %}
+
+<style>
+  {% include "css/lab.css" %}
+</style>
+
+<div class="ui fixed top pointing inverted menu labmenu">
+  <header class="header item">
+    <a href="../index.html">
+      <i class="sitemap icon"></i>
+      {{topic.title}}
+    </a>
+  </header>
+  <div class="right tab-menu menu">
+    {% for chapter in chapters %}
+      <a class="item" data-tab="{{chapter.shortTitle}}">
+        {{chapter.shortTitle}}
+      </a>
+    {% endfor %}
+    </div>
+</div>
+
+<br><br>
+
+  {% for chapter in chapters %}
+  <div  class="ui tab segment lab" data-tab="{{chapter.shortTitle}}">
+    {{ chapter.content }}
+  </div>
+ {% endfor %}
+
+
+<script>
+$('.ui.menu .item')
+  .tab({
+    history: true,
+    historyType: 'hash'
+  })
+;
+</script>
+{% endblock %}

@@ -1,0 +1,17 @@
+ #macro vpanel (type, contentLink, imgLink, title, objectives)
+   <div class="panel {{type}}">
+     <div class="panel-heading">
+       <div class="panel-title">
+         <a href="{{contentLink}}"> {{title}} </a>
+       </div>
+     </div>
+     <div class="panel-body">
+       <div class="thumbnail">
+         <img src="{{imgLink}}"  class="img-responsive col-lg-12">
+       </div>
+        <blockquote>
+          {{objectives}}
+       </blockquote>
+     </div>
+   </div>
+ # endmacro

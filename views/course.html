@@ -1,0 +1,14 @@
+# extends "main.html"
+# block content
+
+{{ header("#", "sitemap", course.title, "Topics") }}
+
+<div class="ui four doubling stackable cards">
+
+# for topic in course.topicList
+  {{ card ("sitemap", "./" + topic.folder + "/index.html", "./" + topic.folder + "/" + topic.topicImg, topic.title, topic.contentWithoutHeadder) }}
+# endfor
+
+</div>
+
+# endblock

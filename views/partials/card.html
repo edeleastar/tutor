@@ -1,0 +1,24 @@
+#macro card (type, contentLink, imgLink, title, objectives, videoLink)
+  <div class="ui card">
+    <div class="content">
+        <div class="right floated meta"> <i class="{{type}} large icon"></i></div>
+        <div class="header"> {{title}} </div>
+    </div>
+    <a href="{{contentLink}}">
+      <img class="ui bordered rounded image" src="{{imgLink}}">
+    </a>
+    <div class="content">
+      <div class="description">
+         {{objectives}}
+      </div>
+    </div>
+    #if videoLink
+      <div class="extra content">
+     <!--   <div class="ui embed" data-url="{{videoLink}}">
+        </div> -->
+        <iframe src="{{videoLink}}" frameborder="0" allowfullscreen></iframe>
+      </div>
+    #endif
+  </div>
+
+#endmacro

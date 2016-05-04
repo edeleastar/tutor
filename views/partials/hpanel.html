@@ -1,0 +1,30 @@
+#macro hpanel (type, contentLink, imgLink, title, objectives)
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h3 class="panel-title">{{title}}</h3>
+    </div>
+    <div class="panel-body">
+      <div class="section">
+        <div class="container" id="topiccontainer">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="thumbnail">
+                #if "none" in imgLink
+                   #include "images/halplaceholder.html"
+                #else
+                  <img class="img-responsive" src="{{imgLink}}">
+                #endif
+              </div>
+            </div>
+            <div class="col-md-7">
+              <h2> <a href={{contentLink}}> {{title}}</a> </h2>
+              <blockquote>
+                {{objectives}}
+              </blockquote>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+#endmacro
