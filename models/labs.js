@@ -31,6 +31,7 @@ module.exports.generateLab = function () {
     title: '',
     link: '',
     imgPath: '',
+    fullImgPath: '',
     icon: 'lab',
     objectives: {},
     objectivesWithoutHeader: {},
@@ -52,6 +53,7 @@ module.exports.generateLab = function () {
     lab.title = lab.chapters[0].shortTitle;
     lab.link = lab.folderName + '/index.html';
     lab.imgPath = lab.folderName + '/img/main.png';
+    lab.fullImgPath = lab.topic + '/' + lab.imgPath;
     lab.objectives = lab.chapters[0].content;
     lab.objectivesWithoutHeader = lab.chapters[0].contentWithoutHeader;
     return lab;

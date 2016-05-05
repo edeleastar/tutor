@@ -1,12 +1,17 @@
-# extends "main.html"
-# block content
+{% import "partials/header.html" as header %}
+{% import "partials/card.html" as card %}
 
+{% extends "main.html" %}
+{%  block content %}
 
-{{ header("index.html", panel_type, course.title, subtitle) }}
+{{ header.header ("index.html", "lab", course.title, subtitle) }}
+
 
 <div class="ui four doubling stackable cards">
-# for resource in resources
-    {{ card (panel_type, resource.topicFolder + "/" + resource.link, resource.fullImgPath, resource.title, resource.objectivesWithoutHeadder) }}
-# endfor
+  {% for resource in labs %}
+  {{ card.card ("lab", resource.topic + "/" + resource.link, resource.fullImgPath, resource.title,
+  resource.objectivesWithoutHeadder) }}
+  {% endfor %}
 </div>
-# endblock
+
+{% endblock %}}

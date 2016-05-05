@@ -34,12 +34,20 @@ module.exports.generateCourse = function () {
 
 module.exports.publishCourse = function (course) {
 
+  var courseSummary = {
+    talks: [],
+    labs: [],
+    course: course,
+  };
+
   course.topics.forEach(topic => {
     futils.changeDirectory(topic.topicFolder);
     topics.publishTopic(topic);
+    Array.prototype.push.apply(courseSummary.labs, topic.labs);
+    Array.prototype.push.apply(courseSummary.talks, topic.talks);
     futils.changeDirectory('..');
   });
 
-  const path = './public-site/index.html';
-  futils.writeFile(path, nunjucks.render('course.html', course));
+  futils.writeFile('./public-site/index.html', nunjucks.render('course.html', course));
+  futils.writeFile('./public-site/labwall.html', nunjucks.render('wall.html', courseSummary));
 };
