@@ -80,6 +80,7 @@ module.exports.publishTopic = function (topic) {
   });
 
   topic.talks.forEach(talk => {
+    console.log('  -->' + talk.title);
     futils.copyFolder2(talk.folder, '../' + 'public-site' + '/' + topic.topicFolder + '/');
   });
   futils.copyFile(topic.img, '../' + 'public-site' + '/' + topic.topicFolder);
