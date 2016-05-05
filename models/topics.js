@@ -12,8 +12,8 @@ function generateTalk(name) {
   var talk = {
     title: '',
     link: '',
-    folder: name,
-    icon: 'film',
+    folder: '',
+    icon: '',
     imgPath: '',
     objectives: {},
     objectivesWithoutHeader: {},
@@ -21,6 +21,7 @@ function generateTalk(name) {
 
   function populate(talk, name) {
     talk.folder = name;
+    talk.icon = 'film';
     const pdfs = futils.getFiles('*.pdf');
     talk.link = name + '/' + pdfs[0];
     const talkFileName = path.parse(talk.link).name;

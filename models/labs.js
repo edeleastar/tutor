@@ -4,7 +4,7 @@ const futils = require('./../utils/futils');
 const mdutils = require('./../utils/mdutils');
 const nunjucks = require('nunjucks');
 
-function generateChapter(fileName) {
+function generateChapter(name) {
 
   var chapter = {
     content: {},
@@ -13,7 +13,7 @@ function generateChapter(fileName) {
     title: '',
   };
 
-  function populate(chapter) {
+  function populate(chapter, fileName) {
     chapter.content = mdutils.parse(fileName);
     chapter.file = fileName;
     chapter.shortTitle = fileName.substring(fileName.indexOf('.') + 1, fileName.lastIndexOf('.'));
@@ -22,7 +22,7 @@ function generateChapter(fileName) {
     return chapter;
   }
 
-  return populate(chapter);
+  return populate(chapter, name);
 }
 
 module.exports.generateLab = function () {
