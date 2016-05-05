@@ -57,7 +57,6 @@ module.exports.copyFolder2 = function (src, dest) {
   sh.cp('-rf', src, dest);
 };
 
-
 function getImageFile(name) {
   if (fs.existsSync(name + '.png'))
     return name + '.png';

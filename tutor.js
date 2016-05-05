@@ -1,10 +1,9 @@
 'use strict';
 
 const glob = require('glob-promise');
-const labs = require('./labs');
-const topics = require('./topics');
-const courses = require('./course');
-
+const labs = require('./models/labs');
+const topics = require('./models/topics');
+const courses = require('./models/course');
 const nunjucks = require('nunjucks');
 
 const root = __dirname;
