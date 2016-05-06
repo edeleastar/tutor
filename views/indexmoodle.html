@@ -1,10 +1,12 @@
+{% import "partials/card.html" as card %}
+
 {% extends "mainmoodle.html" %}
-{%  block content %}
+{% block content %}
 
 <div class="ui four doubling stackable cards">
 
   {% for resource in resources %}
-  {{ card.card (resource.icon, resource.link, resource.imgPath, resource.title, resource.objectivesWithoutHeader) }}
+  {{ card.card (resource.icon, url + '/' + topicFolder + '/' + resource.link, url + '/' + topicFolder + '/' + resource.imgPath, resource.title, resource.objectivesWithoutHeader) }}
   {% endfor %}
 
 </div>

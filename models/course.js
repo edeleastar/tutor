@@ -62,7 +62,8 @@ module.exports.publishCourse = function (course) {
   course.topics.forEach(topic => {
     const topicPath = './public-site' + '/' + topic.topicFolder;
     futils.writeFile(topicPath + '/ajaxlabel.html',
-        nunjucks.render('ajaxlabel.html', { url: courseSummary.url + '/' + topic.topicFolder }));
+        nunjucks.render('ajaxlabel.html', { url: courseSummary.url.substring(5) + '/' + topic.topicFolder }));
+    topic.url = courseSummary.url;
     futils.writeFile(topicPath + '/indexmoodle.html', nunjucks.render('indexmoodle.html', topic));
   });
 };

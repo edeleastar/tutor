@@ -8,16 +8,14 @@
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.1.4/semantic.min.js"></script>
     <style>
-      # include "css/main.css"
+      {% include "css/main.css" %}
     </style>
     <base target="_blank" />
   </head>
   <body>
-    # from  "partials/card.html" import card  as card
     <div class="ui raised segment">
-     # block content
-     # endblock
+     {% block content %}
+     {% endblock %}
     </div>
-
   </body>
  </html>
