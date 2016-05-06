@@ -21,7 +21,11 @@ module.exports.generateCourse = function () {
     const topicsList = futils.getFiles('topic*');
     topicsList.forEach(topicName => {
       futils.changeDirectory(topicName);
-      course.topics.push(topics.generateTopic(topicName));
+      const topic = topics.generateTopic(topicName);
+      if (topic) {
+        course.topics.push(topic);
+      }
+
       futils.changeDirectory('..');
     });
     return course;

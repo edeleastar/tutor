@@ -2,7 +2,7 @@
 
 'use strict';
 
-const glob = require('glob-promise');
+const futils = require('./utils/futils');
 const labs = require('./models/labs');
 const topics = require('./models/topics');
 const courses = require('./models/course');
@@ -12,23 +12,22 @@ const root = __dirname;
 nunjucks.configure(root + '/views', { autoescape: false });
 nunjucks.installJinjaCompat();
 
-glob('course.md').then(files => {
+let files = futils.getFiles('course.md');
+if (files.length == 1) {
+  const course = courses.generateCourse();
+  courses.publishCourse(course);
+} else {
+  files = futils.getFiles('topic.md');
   if (files.length == 1) {
-    console.log('Publishing course');
-    const course = courses.generateCourse();
-    courses.publishCourse(course);
+    const topic = topics.generateTopic();
+    topics.publishTopic(topic);
   } else {
-    glob('topic.md').then(files => {
-      if (files.length == 1) {
-        console.log('Publishing topic');
-        const topic = topics.generateTopic();
-        topics.publishTopic(topic);
-      } else {
-        console.log('Publishing lab');
-        const lab = labs.generateLab();
-        labs.publishLab(lab);
-      }
-    });
+    files = futils.getFiles('*.md');
+    if (files.length > 0) {
+      const lab = labs.generateLab();
+      labs.publishLab(lab);
+    } else {
+      console.log('Unable to detect lab, topic or course')
+    }
   }
-});
-
+}

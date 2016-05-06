@@ -44,6 +44,11 @@ module.exports.generateLab = function () {
 
   function populate(lab) {
     lab.mdFiles = futils.getFiles('*.md');
+    if (lab.mdFiles.length == 0) {
+      console.log('Unable to publish lab: ' + futils.getCurrentDirectory() + ' :Cannot find *.md');
+      return null;
+    }
+
     lab.directories = futils.getDirectories('.');
     lab.folderName = futils.getCurrentFolder();
     lab.topic = futils.getParentFolder();

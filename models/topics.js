@@ -5,6 +5,7 @@ const mdutils = require('./../utils/mdutils');
 const labs = require('./labs');
 const nunjucks = require('nunjucks');
 var path = require('path');
+var fs = require('fs');
 
 function generateTalk(name) {
 
@@ -24,9 +25,19 @@ function generateTalk(name) {
     talk.folder = name;
     talk.icon = 'film';
     const pdfs = futils.getFiles('*.pdf');
+    if (pdfs.length == 0) {
+      console.log('Unable to publish talk: '  + futils.getCurrentDirectory() + '/' + name);
+      return null;
+    }
+
     talk.link = name + '/' + pdfs[0];
     const talkFileName = path.parse(talk.link).name;
     talk.imgPath = name + '/' + futils.getImageFile(path.parse(talk.link).name);
+    if (!fs.existsSync(talkFileName + '.md')) {
+      console.log('Unable to publish talk: ' + futils.getCurrentDirectory() + '/' + name);
+      return null;
+    }
+
     talk.objectives = mdutils.parse(talkFileName + '.md');
     talk.objectivesWithoutHeader = mdutils.parseWithoutHeader(talkFileName + '.md');
     talk.title = mdutils.getHeader(talkFileName + '.md');
@@ -50,6 +61,11 @@ module.exports.generateTopic = function (topicName) {
   };
 
   function populate(topic, name) {
+    if (!fs.existsSync('topic.md')) {
+      console.log('Unable to publish topic: ' + futils.getCurrentDirectory() + '/' + name + '. Cannot find topic.md');
+      return null;
+    }
+
     topic.title = mdutils.getHeader('topic.md');
     topic.objectives = mdutils.parse('topic.md');
     topic.objectivesWithoutHeader = mdutils.parseWithoutHeader('topic.md');
@@ -59,15 +75,22 @@ module.exports.generateTopic = function (topicName) {
 
     bookList.forEach(book => {
       futils.changeDirectory(book);
-      topic.labs.push(labs.generateLab());
+      const lab = labs.generateLab();
+      if (lab) {
+        topic.labs.push(lab);
+      }
+
       futils.changeDirectory('..');
     });
     talkList.forEach(talkName => {
       futils.changeDirectory(talkName);
       const talk = generateTalk(talkName);
-      talk.fullImgPath = topic.topicFolder + '/' + talk.imgPath;
-      talk.topic = topic.topicFolder;
-      topic.talks.push(talk);
+      if (talk) {
+        talk.fullImgPath = topic.topicFolder + '/' + talk.imgPath;
+        talk.topic = topic.topicFolder;
+        topic.talks.push(talk);
+      }
+
       futils.changeDirectory('..');
     });
     topic.img = futils.getTopicImage(topic);
@@ -75,7 +98,7 @@ module.exports.generateTopic = function (topicName) {
     return topic;
   }
 
-  return populate(topic);
+  return populate(topic, topicName);
 };
 
 module.exports.publishTopic = function (topic) {
