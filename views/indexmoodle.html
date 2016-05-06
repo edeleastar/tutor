@@ -1,0 +1,12 @@
+{% extends "mainmoodle.html" %}
+{%  block content %}
+
+<div class="ui four doubling stackable cards">
+
+  {% for resource in resources %}
+  {{ card.card (resource.icon, resource.link, resource.imgPath, resource.title, resource.objectivesWithoutHeader) }}
+  {% endfor %}
+
+</div>
+
+{% endblock %}}

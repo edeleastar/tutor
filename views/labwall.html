@@ -2,15 +2,14 @@
 {% import "partials/card.html" as card %}
 
 {% extends "main.html" %}
-{%  block content %}
+{% block content %}
 
-{{ header.header ("index.html", "lab", course.title, subtitle) }}
-
+{{ header.header ("index.html", "lab", course.title) }}
 
 <div class="ui four doubling stackable cards">
   {% for resource in labs %}
-  {{ card.card ("lab", resource.topic + "/" + resource.link, resource.fullImgPath, resource.title,
-  resource.objectivesWithoutHeadder) }}
+  {{ card.card (resource.icon, resource.topic + "/" + resource.link, resource.fullImgPath, resource.title,
+  resource.objectivesWithoutHeader) }}
   {% endfor %}
 </div>
 

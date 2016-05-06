@@ -3,7 +3,6 @@
 const futils = require('./../utils/futils');
 const mdutils = require('./../utils/mdutils');
 const labs = require('./labs');
-var sh = require('shelljs');
 const nunjucks = require('nunjucks');
 var path = require('path');
 
@@ -12,9 +11,11 @@ function generateTalk(name) {
   var talk = {
     title: '',
     link: '',
+    topic: '',
     folder: '',
     icon: '',
     imgPath: '',
+    fullImgPath: '',
     objectives: {},
     objectivesWithoutHeader: {},
   };
@@ -29,6 +30,7 @@ function generateTalk(name) {
     talk.objectives = mdutils.parse(talkFileName + '.md');
     talk.objectivesWithoutHeader = mdutils.parseWithoutHeader(talkFileName + '.md');
     talk.title = mdutils.getHeader(talkFileName + '.md');
+
     return talk;
   }
 
@@ -40,7 +42,8 @@ module.exports.generateTopic = function (topicName) {
   var topic = {
     title: {},
     img: {},
-    content: {},
+    objectives: {},
+    objectivesWithoutHeader: {},
     topicFolder: {},
     labs: [],
     talks: [],
@@ -48,7 +51,8 @@ module.exports.generateTopic = function (topicName) {
 
   function populate(topic, name) {
     topic.title = mdutils.getHeader('topic.md');
-    topic.content = mdutils.parse('topic.md');
+    topic.objectives = mdutils.parse('topic.md');
+    topic.objectivesWithoutHeader = mdutils.parseWithoutHeader('topic.md');
     topic.topicFolder = futils.getCurrentFolder();
     const bookList = futils.getFiles('book*');
     const talkList = futils.getFiles('talk*');
@@ -60,7 +64,10 @@ module.exports.generateTopic = function (topicName) {
     });
     talkList.forEach(talkName => {
       futils.changeDirectory(talkName);
-      topic.talks.push(generateTalk(talkName));
+      const talk = generateTalk(talkName);
+      talk.fullImgPath = topic.topicFolder + '/' + talk.imgPath;
+      talk.topic = topic.topicFolder;
+      topic.talks.push(talk);
       futils.changeDirectory('..');
     });
     topic.img = futils.getTopicImage(topic);
@@ -76,18 +83,19 @@ module.exports.publishTopic = function (topic) {
 
   topic.labs.forEach(lab => {
     futils.changeDirectory(lab.folderName);
+    lab.credits = topic.credits;
     labs.publishLab(lab);
     futils.changeDirectory('..');
   });
 
   topic.talks.forEach(talk => {
     console.log('  -->' + talk.title);
-    futils.copyFolder2(talk.folder, '../' + 'public-site' + '/' + topic.topicFolder + '/');
+    futils.copyFolder(talk.folder, '../' + 'public-site' + '/' + topic.topicFolder + '/');
   });
   futils.copyFile(topic.img, '../' + 'public-site' + '/' + topic.topicFolder);
 
   topic.resources = topic.talks.concat(topic.labs);
 
-  const path = '../' + 'public-site' + '/' + topic.topicFolder + '/index.html';
-  futils.writeFile(path, nunjucks.render('topic.html', topic));
+  const basePath = '../' + 'public-site' + '/' + topic.topicFolder;
+  futils.writeFile(basePath + '/index.html', nunjucks.render('topic.html', topic));
 };

@@ -68,7 +68,7 @@ module.exports.publishLab = function (lab) {
   const path = '../../' + 'public-site' + '/' + lab.topic + '/' + lab.folderName;
   futils.remove(path);
   lab.directories.forEach(directory => {
-    futils.copyFolder(directory, path + '/' + directory);
+    futils.copyFolder(directory, path + '/');
   });
   futils.writeFile(path + '/index.html', nunjucks.render('lab.html', lab));
 };

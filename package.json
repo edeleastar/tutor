@@ -1,15 +1,17 @@
 {
   "name": "tutor.js",
   "version": "1.0.0",
-  "description": "",
+  "description": "Static course web site generator",
   "main": "tutor.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Eamonn de Leastar (edeleastar@wit.ie)",
+  "license": "MIT Licence",
+  "bin": {
+    "tutor.js": "./tutor.js"
+  },
   "dependencies": {
-    "firstline": "^1.2.0",
     "glob": "^7.0.3",
     "glob-promise": "^1.0.6",
     "marked": "^0.3.5",

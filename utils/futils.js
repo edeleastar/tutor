@@ -49,11 +49,6 @@ module.exports.copyFile = function (src, dest) {
 
 module.exports.copyFolder = function (src, dest) {
   sh.mkdir('-p', dest);
-  sh.cp('-rf', src, path.dirname(dest));
-};
-
-module.exports.copyFolder2 = function (src, dest) {
-  sh.mkdir('-p', dest);
   sh.cp('-rf', src, dest);
 };
 
@@ -84,4 +79,31 @@ module.exports.getTopicImage = function (topic) {
 
 module.exports.getImageFile = function (name) {
   return getImageFile(name);
+};
+
+module.exports.getCourseUrl = function () {
+  if (fs.existsSync('courseurl')) {
+    var array = fs.readFileSync('courseurl').toString().split('\n');
+    return array[0];
+  } else {
+    return '';
+  }
+};
+
+module.exports.getIgnoreList = function () {
+  if (fs.existsSync('mbignore')) {
+    var array = fs.readFileSync('mbignore').toString().split(' ');
+    return array;
+  } else {
+    return null;
+  }
+};
+
+module.exports.getCredits = function () {
+  if (fs.existsSync('credits')) {
+    var array = fs.readFileSync('credits').toString().split('\n');
+    return array[0];
+  } else {
+    return '';
+  }
 };

@@ -3,7 +3,6 @@
 const marked = require('marked');
 const futils = require('./futils');
 var fs = require('fs');
-var firstline = require('firstline');
 
 module.exports.parse = function (fileName) {
   const mdContent = futils.readFile(fileName);
@@ -15,7 +14,7 @@ module.exports.parse = function (fileName) {
 module.exports.parseWithoutHeader = function (fileName) {
   var array = fs.readFileSync(fileName).toString().split('\n');
   array.shift();
-  var res = array.join();
+  var res = array.join('');
   return marked(res);
 };
 

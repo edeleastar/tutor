@@ -4,9 +4,7 @@ const futils = require('./../utils/futils');
 const mdutils = require('./../utils/mdutils');
 const labs = require('./labs');
 const topics = require('./topics');
-var sh = require('shelljs');
 const nunjucks = require('nunjucks');
-var path = require('path');
 
 module.exports.generateCourse = function () {
 
@@ -38,10 +36,19 @@ module.exports.publishCourse = function (course) {
     talks: [],
     labs: [],
     course: course,
+    url: '',
+    credits: '',
   };
+
+  courseSummary.credits = futils.getCredits();
+  courseSummary.url = futils.getCourseUrl();
+  const ignoreTopic = futils.getIgnoreList();
+  course.topics = course.topics.filter(topic => ignoreTopic.indexOf(topic.topicFolder) == -1);
+  course.credits = courseSummary.credits;
 
   course.topics.forEach(topic => {
     futils.changeDirectory(topic.topicFolder);
+    topic.credits = courseSummary.credits;
     topics.publishTopic(topic);
     Array.prototype.push.apply(courseSummary.labs, topic.labs);
     Array.prototype.push.apply(courseSummary.talks, topic.talks);
@@ -49,5 +56,13 @@ module.exports.publishCourse = function (course) {
   });
 
   futils.writeFile('./public-site/index.html', nunjucks.render('course.html', course));
-  futils.writeFile('./public-site/labwall.html', nunjucks.render('wall.html', courseSummary));
+  futils.writeFile('./public-site/labwall.html', nunjucks.render('labwall.html', courseSummary));
+  futils.writeFile('./public-site/talkwall.html', nunjucks.render('talkwall.html', courseSummary));
+
+  course.topics.forEach(topic => {
+    const topicPath = './public-site' + '/' + topic.topicFolder;
+    futils.writeFile(topicPath + '/ajaxlabel.html',
+        nunjucks.render('ajaxlabel.html', { url: courseSummary.url + '/' + topic.topicFolder }));
+    futils.writeFile(topicPath + '/indexmoodle.html', nunjucks.render('indexmoodle.html', topic));
+  });
 };

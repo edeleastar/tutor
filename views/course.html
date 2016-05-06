@@ -10,7 +10,7 @@
 <div class="ui four doubling stackable cards">
 
   {% for topic in topics %}
-  {{ card.card ("sitemap", "./" + topic.topicFolder + "/index.html", "./" + topic.topicFolder + "/" + topic.img, topic.title, topic.contentWithoutHeadder) }}
+  {{ card.card ("sitemap", "./" + topic.topicFolder + "/index.html", "./" + topic.topicFolder + "/" + topic.img, topic.title, topic.objectivesWithoutHeader) }}
   {% endfor %}
 
 </div>
