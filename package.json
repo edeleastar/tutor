@@ -9,7 +9,7 @@
   "author": "Eamonn de Leastar (edeleastar@wit.ie)",
   "license": "MIT Licence",
   "bin": {
-    "tutor.js": "./tutor.js"
+    "tutor": "./tutor.js"
   },
   "dependencies": {
     "glob": "^7.0.3",
