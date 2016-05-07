@@ -47,7 +47,10 @@ module.exports.publishCourse = function (course) {
   courseSummary.credits = futils.getCredits();
   courseSummary.url = futils.getCourseUrl();
   const ignoreTopic = futils.getIgnoreList();
-  course.topics = course.topics.filter(topic => ignoreTopic.indexOf(topic.topicFolder) == -1);
+  if (ignoreTopic) {
+    course.topics = course.topics.filter(topic => ignoreTopic.indexOf(topic.topicFolder) == -1);
+  }
+
   course.credits = courseSummary.credits;
 
   course.topics.forEach(topic => {
