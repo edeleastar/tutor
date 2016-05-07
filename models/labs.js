@@ -68,8 +68,6 @@ module.exports.generateLab = function () {
 };
 
 module.exports.publishLab = function (lab) {
-
-  console.log('  -->' + lab.title);
   const path = '../../' + 'public-site' + '/' + lab.topic + '/' + lab.folderName;
   futils.remove(path);
   lab.directories.forEach(directory => {
