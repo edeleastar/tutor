@@ -26,7 +26,7 @@ function generateTalk(name) {
     talk.icon = 'film';
     const pdfs = futils.getFiles('*.pdf').sort();
     if (pdfs.length == 0) {
-      console.log('Unable to publish talk: '  + futils.getCurrentDirectory() + '/' + name);
+      console.log('Unable to publish talk: ' + futils.getCurrentDirectory() + '/' + name);
       return null;
     }
 
@@ -71,17 +71,9 @@ module.exports.generateTopic = function (topicName) {
     topic.objectivesWithoutHeader = mdutils.parseWithoutHeader('topic.md');
     topic.topicFolder = futils.getCurrentFolder();
     const bookList = futils.getFiles('book*').sort();
-    const talkList = futils.getFiles('talk*').sort();;
+    const talkList = futils.getFiles('talk*').sort();
+    ;
 
-    bookList.forEach(book => {
-      futils.changeDirectory(book);
-      const lab = labs.generateLab();
-      if (lab) {
-        topic.labs.push(lab);
-      }
-
-      futils.changeDirectory('..');
-    });
     talkList.forEach(talkName => {
       futils.changeDirectory(talkName);
       const talk = generateTalk(talkName);
@@ -89,6 +81,15 @@ module.exports.generateTopic = function (topicName) {
         talk.fullImgPath = topic.topicFolder + '/' + talk.imgPath;
         talk.topic = topic.topicFolder;
         topic.talks.push(talk);
+      }
+
+      futils.changeDirectory('..');
+    });
+    bookList.forEach(book => {
+      futils.changeDirectory(book);
+      const lab = labs.generateLab();
+      if (lab) {
+        topic.labs.push(lab);
       }
 
       futils.changeDirectory('..');
@@ -104,18 +105,23 @@ module.exports.generateTopic = function (topicName) {
 module.exports.publishTopic = function (topic) {
   console.log(topic.title);
 
-  topic.labs.forEach(lab => {
-    futils.changeDirectory(lab.folderName);
-    lab.credits = topic.credits;
-    labs.publishLab(lab);
-    futils.changeDirectory('..');
-  });
-
+  if (topic.talks.length > 0)
+    console.log(' Talks:');
   topic.talks.forEach(talk => {
     console.log('  -->' + talk.title);
     futils.copyFolder(talk.folder, '../' + 'public-site' + '/' + topic.topicFolder + '/');
   });
   futils.copyFile(topic.img, '../' + 'public-site' + '/' + topic.topicFolder);
+
+  if (topic.labs.length > 0)
+    console.log(' Labs:');
+  topic.labs.forEach(lab => {
+    futils.changeDirectory(lab.folderName);
+    lab.credits = topic.credits;
+    console.log('  -->' + lab.title);
+    labs.publishLab(lab);
+    futils.changeDirectory('..');
+  });
 
   topic.resources = topic.talks.concat(topic.labs);
 
