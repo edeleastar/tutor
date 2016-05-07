@@ -107,14 +107,16 @@ module.exports.publishTopic = function (topic) {
 
   if (topic.talks.length > 0)
     console.log(' Talks:');
+
   topic.talks.forEach(talk => {
     console.log('  -->' + talk.title);
     futils.copyFolder(talk.folder, '../' + 'public-site' + '/' + topic.topicFolder + '/');
   });
-  futils.copyFile(topic.img, '../' + 'public-site' + '/' + topic.topicFolder);
+  futils.copyFileToFolder(topic.img, '../' + 'public-site' + '/' + topic.topicFolder);
 
   if (topic.labs.length > 0)
     console.log(' Labs:');
+
   topic.labs.forEach(lab => {
     futils.changeDirectory(lab.folderName);
     lab.credits = topic.credits;

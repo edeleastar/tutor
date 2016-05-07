@@ -47,6 +47,11 @@ module.exports.copyFile = function (src, dest) {
   sh.cp('-rf', src, dest);
 };
 
+module.exports.copyFileToFolder = function (src, dest) {
+  sh.mkdir('-p', dest);
+  sh.cp('-rf', src, dest);
+};
+
 module.exports.copyFolder = function (src, dest) {
   sh.mkdir('-p', dest);
   sh.cp('-rf', src, dest);
