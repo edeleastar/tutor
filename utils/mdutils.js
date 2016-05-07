@@ -1,14 +1,12 @@
 'use strict';
 
-const marked = require('marked');
+const marked = require('./marked');
 const futils = require('./futils');
 var fs = require('fs');
 
 module.exports.parse = function (fileName) {
   const mdContent = futils.readFile(fileName);
-  const filtered1 = mdContent.replace(/#/g, '# ');
-  const filtered2 = filtered1.replace(/# #/g, '## ');
-  return marked(filtered2);
+  return marked(mdContent);
 };
 
 module.exports.parseWithoutHeader = function (fileName) {
