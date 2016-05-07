@@ -18,7 +18,7 @@ module.exports.generateCourse = function () {
   function populate(course) {
     course.content = mdutils.parse('course.md');
     course.title = mdutils.getHeader('course.md');
-    const topicsList = futils.getFiles('topic*');
+    const topicsList = futils.getFiles('topic*').sort();
     topicsList.forEach(topicName => {
       futils.changeDirectory(topicName);
       const topic = topics.generateTopic(topicName);

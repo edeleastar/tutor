@@ -24,7 +24,7 @@ function generateTalk(name) {
   function populate(talk, name) {
     talk.folder = name;
     talk.icon = 'film';
-    const pdfs = futils.getFiles('*.pdf');
+    const pdfs = futils.getFiles('*.pdf').sort();
     if (pdfs.length == 0) {
       console.log('Unable to publish talk: '  + futils.getCurrentDirectory() + '/' + name);
       return null;
@@ -70,8 +70,8 @@ module.exports.generateTopic = function (topicName) {
     topic.objectives = mdutils.parse('topic.md');
     topic.objectivesWithoutHeader = mdutils.parseWithoutHeader('topic.md');
     topic.topicFolder = futils.getCurrentFolder();
-    const bookList = futils.getFiles('book*');
-    const talkList = futils.getFiles('talk*');
+    const bookList = futils.getFiles('book*').sort();
+    const talkList = futils.getFiles('talk*').sort();;
 
     bookList.forEach(book => {
       futils.changeDirectory(book);
