@@ -21,10 +21,11 @@ class Chapter {
 
 class Lab extends LearningObject {
   constructor(pattern) {
-    const mdFiles = glob.sync('*.md').sort();
+    let mdFiles = glob.sync('*.md').sort();
+    if (mdFiles.length === 0) mdFiles = ['error: missing lab'];
     super(path.parse(mdFiles[0]).name);
     this.parentTopic = futils.getParentFolder();
-    this.chapters = this.harvestChapters(mdFiles);
+    if (mdFiles[0] != 'error: missing lab') this.chapters = this.harvestChapters(mdFiles);
     this.directories = futils.getDirectories('.');
     this.img = futils.getImageFile('img/main');
     this.icon = 'lab';
@@ -48,7 +49,7 @@ class Lab extends LearningObject {
   }
 
   publish (basepath) {
-    console.log('  -->' + this.folder);
+    if (this.chapters) console.log('  -->' + this.chapters[0].shortTitle);
     const path = '../' + basepath + '/' + this.folder;
     futils.initEmptyPath(path);
     this.directories.forEach(directory => {

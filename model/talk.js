@@ -9,7 +9,8 @@ const LearningObject = require('./learningobject.js').LearningObject;
 
 class Talk extends LearningObject {
   constructor(pattern, topic) {
-    const pdfs = glob.sync('*.pdf').sort();
+    let pdfs = glob.sync('*.pdf').sort();
+    if (pdfs.length === 0) pdfs = ['error: missing pdf'];
     super(path.parse(pdfs[0]).name);
     this.link = pdfs[0];
     this.parentFolder = futils.getParentFolder();
