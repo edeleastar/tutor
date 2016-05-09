@@ -48,7 +48,7 @@ class Lab extends LearningObject {
   }
 
   publish (basepath) {
-    console.log('  -->' + this.title);
+    console.log('  -->' + this.folder);
     const path = '../' + basepath + '/' + this.folder;
     futils.initEmptyPath(path);
     this.directories.forEach(directory => {

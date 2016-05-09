@@ -16,6 +16,8 @@ class LearningObject {
       this.title = mdutils.getHeader(pattern + '.md');
       this.objectives = mdutils.parse(pattern + '.md');
       this.objectivesWithoutHeader = mdutils.parseWithoutHeader(pattern + '.md');
+    } else {
+      this.title = pattern;
     }
   }
 }
