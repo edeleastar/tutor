@@ -39,7 +39,6 @@ module.exports.generateLab = function () {
     mdFiles: [],
     directories: [],
     folderName: '',
-    topic: '',
   };
 
   function populate(lab) {

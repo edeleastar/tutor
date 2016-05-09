@@ -24,6 +24,7 @@ module.exports.writeFile = function (filename, contents) {
 };
 
 module.exports.getCurrentFolder = function () {
+  const s = sh.pwd();
   return path.basename(sh.pwd());
 };
 
@@ -76,23 +77,14 @@ module.exports.getTopicImage = function (topic) {
     return imgFile;
   else {
     if (topic.talks.length > 0)
-      return topic.talks[0].imgPath;
+      return topic.talks[0].folder + '/' + topic.talks[0].img;
     else if (topic.labs.length > 0)
-      return topic.labs[0].imgPath;
+      return topic.labs[0].folder + '/' + topic.labs[0].img;
   }
 };
 
 module.exports.getImageFile = function (name) {
   return getImageFile(name);
-};
-
-module.exports.getCourseUrl = function () {
-  if (fs.existsSync('courseurl')) {
-    var array = fs.readFileSync('courseurl').toString().split('\n');
-    return array[0];
-  } else {
-    return '';
-  }
 };
 
 module.exports.getIgnoreList = function () {
@@ -104,11 +96,41 @@ module.exports.getIgnoreList = function () {
   }
 };
 
-module.exports.getCredits = function () {
-  if (fs.existsSync('credits')) {
-    var array = fs.readFileSync('credits').toString().split('\n');
-    return array[0];
-  } else {
-    return '';
+module.exports.initEmptyPath = function (path) {
+  if (fs.existsSync(path)) {
+    sh.rm('-rf', path);
   }
+
+  sh.mkdir(path);
+}
+
+function readFile(creditPath) {
+  var array = fs.readFileSync(creditPath).toString().split('\n');
+  return array[0];
+}
+
+module.exports.getCourseUrl = function () {
+  if (fs.existsSync('courseurl'))
+    return readFile('courseurl');
+  else if (fs.existsSync('../courseurl'))
+    return readFile('../courseurl');
+  else if (fs.existsSync('../../courseurl'))
+    return readFile('../../courseurl');
+  else if (fs.existsSync('../../../courseurl'))
+    return readFile('../../../courseurl');
+  else
+    return '';
+};
+
+module.exports.getCredits = function () {
+  if (fs.existsSync('credits'))
+    return readFile('credits');
+  else if (fs.existsSync('../credits'))
+    return readFile('../credits');
+  else if (fs.existsSync('../../credits'))
+    return readFile('../../credits');
+  else if (fs.existsSync('../../../credits'))
+    return readFile('../../../credits');
+  else
+    return '';
 };

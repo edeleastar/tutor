@@ -6,7 +6,10 @@
 <div class="ui four doubling stackable cards">
 
   {% for resource in resources %}
-  {{ card.card (resource.icon, url + '/' + topicFolder + '/' + resource.link, url + '/' + topicFolder + '/' + resource.imgPath, resource.title, resource.objectivesWithoutHeader) }}
+  {{ card.card (resource.icon,
+                url + resource.parentFolder + '/' + resource.folder + '/' + resource.link,
+                url + resource.parentFolder + '/' + resource.folder + '/' + resource.img, resource.title,
+                resource.objectivesWithoutHeader) }}
   {% endfor %}
 
 </div>

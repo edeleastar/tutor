@@ -12,7 +12,6 @@ function generateTalk(name) {
   var talk = {
     title: '',
     link: '',
-    topic: '',
     folder: '',
     icon: '',
     imgPath: '',
@@ -72,7 +71,6 @@ module.exports.generateTopic = function (topicName) {
     topic.topicFolder = futils.getCurrentFolder();
     const bookList = futils.getFiles('book*').sort();
     const talkList = futils.getFiles('talk*').sort();
-    ;
 
     talkList.forEach(talkName => {
       futils.changeDirectory(talkName);
