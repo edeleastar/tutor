@@ -62,7 +62,7 @@ Finally, from inside the folder you just cloned, enter the following command:
 npm install -g
 ~~~
 
-Thats it. To test it out, clone a sample course web:
+This will install `tutor` as a command. To test it out, clone a sample course web:
 
 ~~~
 git clone https://github.com/edeleastar/tutor-example-course.git
@@ -75,7 +75,7 @@ cd tutor-example-course
 tutor
 ~~~
 
-If all goes smoothly, you should see on the console a list of the topics as they are generated:
+If all goes smoothly, you should see on the console a list of the topics as they are generated for the sample course:
 
 ~~~
 Introducing HTML
@@ -113,51 +113,75 @@ The site will be generated into a folder called `public-site` in the same folder
 
 In the root folder of a course web, there are a few general files:
 
-- course.md: high level summary of course
-- credits: list of contributors
-- mbignore: list of topics which are to be excluded from the course when published publish (optional)
+~~~
+├── course.md: high level summary of course
+├── credits: list of contributors
+├── mbignore: list of contributors
+~~~
 
 The remainder is a list of `topics` folders:
 
-- topic-01
-- topic-02
-- topic-03
-- etc ...
+~~~
+├── topic-01
+├── topic-02
+├── topic-03
+│   etc ...
+~~~
 
 Each topic consists of:
 
-- topic.md: Topic title + summary
-- topic.png: Image file for topic
+~~~
+├── topic-01
+│   ├── topic.md: topic title + summary
+│   ├── topic.png:Image file for topic
+~~~
 
 + a list of `talks` and `labs`:
 
-- talk-01: the first slide deck
-- talk-01: the second slide deck
-- book-01: the first lab
-- book-01: the second lab
-- etc...
+~~~
+    ├── talk-01: the first slide deck
+    ├── talk-02: the second slide deck
+    ├── book-01: the first lab
+    └── book-02: the second lab
+~~~
 
 Each talks consists of:
 
-- talk-0x.pdf: the slide deck
-- talk-0x.md: a summary of the talk
-- talk-0x.png: an image represent the talk on the web
+~~~
+    └── talk-XX
+        ├── talkname.pdf: the slide deck
+        ├── talkname.md: a summary of the talk
+        └── talkname.png: an image represent the talk on the web
+~~~
 
-Each lab contains a series of steps each encoded in markdown. They are numbered as  `XX.Title.md`, where number is typically two digits starting with `00`. Eg:
+Each lab contains a series of steps each encoded in markdown. They are numbered as  `XX.Title.md`, where number is typically two digits starting with `00`:
 
-- 00.Lab-01.md
-- 01.01.md
-- 02.02.md
-- 03.03.md
-- 04.04.md
-- 05.05.md
-- 06.Exercises.md
-- img
-    - main.png: image used for the lab
-    - 01.png
-    - 02.png
-- archives
-    -archive.zip
+~~~
+    └── book-01
+        ├── 00.Lab-01.md
+        ├── 01.01.md
+        ├── 02.02.md
+        ├── 03.03.md
+        ├── 04.04.md
+        ├── 05.Exercises.md
+        ├── archives
+        │   └── archive.zip
+        └── img
+            ├── 01.png
+            ├── 02.png
+            └── 03.png
+~~~
 
-Each step can use the full range of conventional markdown - including support for github flavoured markdown, including fenced code blocks. Also included is syntax highlighting via bundled highlight.js. Additionally, subfolders can be linked to from the lab steps, and they will be published with their contents. It can be useful store images in an `img` folder, archives for download in an `archives` folder.
+Each step can use the full range of conventional markdown - including support for github flavoured markdown, including fenced code blocks. Also included is syntax highlighting via bundled highlight.js. Additionally, subfolders can be linked to from the lab steps, and they will be published with their contents. It can be useful store images in an `img` folder, archives for download in an `archives` folder. 
 
+An example of syntax highlighting:
+
+- <http://edeleastar.github.io/tutor-example-site/topic08/book/index.html#/05>
+
+Images:
+
+- <http://edeleastar.github.io/tutor-example-site/topic03/book-a/index.html#/06>
+
+Archives:
+
+- <http://edeleastar.github.io/tutor-example-site/topic03/book-a/index.html#/Exercises>
