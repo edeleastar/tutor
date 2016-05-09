@@ -67,7 +67,6 @@ class Topic extends LearningObject {
       console.log('  -->' + talk.title);
       futils.copyFolder(talk.folder, path + '/');
     });
-    futils.copyFileToFolder(this.img, path + '/' + this.folder);
   }
 
   publishLabs(path) {

@@ -101,8 +101,8 @@ module.exports.initEmptyPath = function (path) {
     sh.rm('-rf', path);
   }
 
-  sh.mkdir(path);
-}
+  sh.mkdir('-p', path);
+};
 
 function readFile(creditPath) {
   var array = fs.readFileSync(creditPath).toString().split('\n');

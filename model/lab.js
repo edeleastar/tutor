@@ -23,7 +23,7 @@ class Lab extends LearningObject {
   constructor(pattern) {
     const mdFiles = glob.sync('*.md').sort();
     super(path.parse(mdFiles[0]).name);
-    this.parentFolder = futils.getParentFolder();
+    this.parentTopic = futils.getParentFolder();
     this.chapters = this.harvestChapters(mdFiles);
     this.directories = futils.getDirectories('.');
     this.img = futils.getImageFile('img/main');
