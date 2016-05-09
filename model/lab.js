@@ -24,7 +24,7 @@ class Lab extends LearningObject {
     let mdFiles = glob.sync('*.md').sort();
     if (mdFiles.length === 0) mdFiles = ['error: missing lab'];
     super(path.parse(mdFiles[0]).name);
-    this.parentTopic = futils.getParentFolder();
+    this.parentFolder = futils.getParentFolder();
     if (mdFiles[0] != 'error: missing lab') this.chapters = this.harvestChapters(mdFiles);
     this.directories = futils.getDirectories('.');
     this.img = futils.getImageFile('img/main');
@@ -45,6 +45,7 @@ class Lab extends LearningObject {
       };
       chapters.push(chapter);
     });
+    this.title = chapters[0].shortTitle;
     return chapters;
   }
 
