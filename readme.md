@@ -116,10 +116,10 @@ In the root folder of a course web, there are a few general files:
 ~~~
 ├── course.md: high level summary of course
 ├── credits: list of contributors
-├── mbignore: list of contributors
+├── mbignore: list topics to include from the course web
 ~~~
 
-The remainder is a list of `topics` folders:
+The remainder is the `topics` folders:
 
 ~~~
 ├── topic-01
@@ -172,7 +172,14 @@ Each lab contains a series of steps each encoded in markdown. They are numbered 
             └── 03.png
 ~~~
 
-Each step can use the full range of conventional markdown - including support for github flavoured markdown, including fenced code blocks. Also included is syntax highlighting via bundled highlight.js. Additionally, subfolders can be linked to from the lab steps, and they will be published with their contents. It can be useful store images in an `img` folder, archives for download in an `archives` folder. 
+Each step can use the full range of conventional markdown - including support for github flavoured markdown, fenced code blocks etc. For more details see:
+
+- <https://help.github.com/articles/basic-writing-and-formatting-syntax/>
+- <https://help.github.com/articles/organizing-information-with-tables/>
+
+Also included is syntax highlighting via bundled [highlight.js](https://highlightjs.org/}. 
+
+In labs only, subfolders can be included, and they will be published with their contents in full. This can be useful store images in an `img` folder, archives for download in an `archives` folder etc... 
 
 An example of syntax highlighting:
 
@@ -185,3 +192,5 @@ Images:
 Archives:
 
 - <http://edeleastar.github.io/tutor-example-site/topic03/book-a/index.html#/Exercises>
+
+Finally, the `tutor` command is context sensetive, so will build the complete course if run from the top level, a single topic (with all its talks and labs) if run from within a topic folder, and it will build a single book/lab if run from in a book folder.
