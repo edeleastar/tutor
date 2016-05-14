@@ -1,7 +1,7 @@
 tutor
 =====
 
-A static web site generator for producing course web sites from largely markedown content. For example this site here is generated using this tool:
+A static web site generator for producing course web sites from largely markdown content. For example this site here is generated using this tool:
 
  - <http://edeleastar.github.io/tutor-example-site>
 
@@ -133,7 +133,7 @@ Each topic consists of:
 ~~~
 ├── topic-01
 │   ├── topic.md: topic title + summary
-│   ├── topic.png:Image file for topic
+│   ├── topic.png: Image file for topic
 ~~~
 
 + a list of `talks` and `labs`:
@@ -151,7 +151,7 @@ Each talks consists of:
     └── talk-XX
         ├── talkname.pdf: the slide deck
         ├── talkname.md: a summary of the talk
-        └── talkname.png: an image represent the talk on the web
+        └── talkname.png: an image to represent the talk on the course web
 ~~~
 
 Each lab contains a series of steps each encoded in markdown. They are numbered as  `XX.Title.md`, where number is typically two digits starting with `00`:
