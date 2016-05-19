@@ -1,6 +1,8 @@
 tutor
 =====
 
+## Introduction
+
 A static web site generator for producing course web sites from largely markdown content. For example this site here is generated using this tool:
 
  - <http://edeleastar.github.io/tutor-example-site>
@@ -62,7 +64,9 @@ Finally, from inside the folder you just cloned, enter the following command:
 npm install -g
 ~~~
 
-This will install `tutor` as a command. To test it out, clone a sample course web:
+## Commands
+
+The above will install `tutor` as a command. To test it out, clone a sample course web:
 
 ~~~
 git clone https://github.com/edeleastar/tutor-example-course.git
@@ -108,6 +112,8 @@ Box Model
 The site will be generated into a folder called `public-site` in the same folder. If you open `index.html` in there you should see this site, generated locally:
 
  - <http://edeleastar.github.io/tutor-example-site>
+
+The `tutor` command is context sensetive, so will build the complete course if run from the top level, a single topic (with all its talks and labs) if run from within a topic folder, and it will build a single book/lab if run from in a book folder.
 
 ##Course Web Source File Structure
 
@@ -193,4 +199,16 @@ Archives:
 
 - <http://edeleastar.github.io/tutor-example-site/topic03/book-a/index.html#/Exercises>
 
-Finally, the `tutor` command is context sensetive, so will build the complete course if run from the top level, a single topic (with all its talks and labs) if run from within a topic folder, and it will build a single book/lab if run from in a book folder.
+## Embedding Topics in Moodle (or elsewhere)
+
+In addition to a `index.html` file generated for each topic, two companion files are also generated:
+
+- indexmoodle.html
+- ajaxlabel.html
+
+These work in tandem to facilitate content embedding. `indexmoodle.html` is a paired down version of the topic, with protocol neutral headers and absolute urls to contained talks + labs. `ajaxlabel.html` is a page fragment which fetches indexmoodle via an ajax call, and renders it in a bootstrap container (for moodle). Typically, this is pasted into a `topic` resource in moodle, and will serve the topic seamlessly in place.
+
+The above mechanism requires you to provide the url of the hosted course web - as the url is stitched into both files by tutor. You provide this in a file called 'courseurl' in the root folder of the course. See the example above for this procedure in action.
+
+
+
