@@ -183,7 +183,7 @@ Each step can use the full range of conventional markdown - including support fo
 - <https://help.github.com/articles/basic-writing-and-formatting-syntax/>
 - <https://help.github.com/articles/organizing-information-with-tables/>
 
-Also included is syntax highlighting via bundled [highlight.js](https://highlightjs.org/}. 
+Also included is syntax highlighting via bundled [highlight.js](https://highlightjs.org/). 
 
 In labs only, subfolders can be included, and they will be published with their contents in full. This can be useful store images in an `img` folder, archives for download in an `archives` folder etc... 
 
