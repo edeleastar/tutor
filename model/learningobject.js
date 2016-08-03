@@ -9,7 +9,7 @@ var fs = require('fs');
 
 class LearningObject {
   constructor(pattern) {
-    this.folder = path.basename(sh.pwd());
+    this.folder = path.basename(process.cwd());
     this.img = futils.getImageFile(pattern);
     this.link = 'index.html';
     if (fs.existsSync(pattern + '.md')) {

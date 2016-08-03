@@ -25,7 +25,7 @@ module.exports.writeFile = function (filename, contents) {
 
 module.exports.getCurrentFolder = function () {
   const s = sh.pwd();
-  return path.basename(sh.pwd());
+  return path.basename(process.cwd());
 };
 
 module.exports.changeDirectory = function (directory) {
@@ -37,7 +37,7 @@ module.exports.getCurrentDirectory = function () {
 };
 
 module.exports.getParentFolder = function () {
-  return path.basename(path.dirname(sh.pwd()));
+  return path.basename(path.dirname(process.cwd()));
 };
 
 module.exports.remove = function (folder) {
