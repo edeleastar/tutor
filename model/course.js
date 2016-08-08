@@ -50,11 +50,13 @@ class Course extends LearningObject {
       title: this.title,
       resources: [],
       icon: 'film',
+      credits: futils.getCredits(),
     };
     var allLabs = {
       title: this.title,
       resources: [],
       icon: 'lab',
+      credits: futils.getCredits(),
     };
     this.topics.forEach(topic => {
       Array.prototype.push.apply(allLabs.resources, topic.labs);
