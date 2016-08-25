@@ -46,11 +46,9 @@ Labs are step by step instructions focused on a specific task. Talks are simple 
 
 ## Installation
 
-First install node.js:
+First install the latest node.js:
 
 - <https://nodejs.org>
-
-Select the `LTS` version.
 
 Then, clone this repo:
 
