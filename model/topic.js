@@ -65,7 +65,9 @@ class Topic extends LearningObject {
     if (this.talks.length > 0) console.log(' Talks:');
     this.talks.forEach(talk => {
       console.log('  -->' + talk.title);
-      futils.copyFolder(talk.folder, path + '/');
+
+      //futils.copyFolder(talk.folder, path + '/');
+      futils.copyTalk(talk.folder, path + '/');
     });
   }
 

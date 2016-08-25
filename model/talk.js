@@ -19,7 +19,9 @@ class Talk extends LearningObject {
 
   publish(path) {
     console.log('  -->' + this.title);
-    futils.copyFolder(this.folder, '../' + path + '/');
+
+    //futils.copyFolder(this.folder, '../' + path + '/');
+    futils.copyTalk(this.folder, '../' + path + '/');
   }
 }
 

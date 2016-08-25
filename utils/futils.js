@@ -5,6 +5,8 @@ var path = require('path');
 const glob = require('glob');
 var sh = require('shelljs');
 
+sh.config.silent = true;
+
 module.exports.getFiles = function (pattern) {
   return glob.sync(pattern);
 };
@@ -56,6 +58,16 @@ module.exports.copyFileToFolder = function (src, dest) {
 module.exports.copyFolder = function (src, dest) {
   sh.mkdir('-p', dest);
   sh.cp('-rf', src, dest);
+};
+
+module.exports.copyTalk = function (src, dest) {
+  dest =  dest + src;
+  sh.mkdir('-p', dest);
+  sh.cp('-rf', src + '/*.pdf', dest);
+  sh.cp('-rf', src + '/*.png', dest);
+  sh.cp('-rf', src + '/*.jpg', dest);
+  sh.cp('-rf', src + '/*.jpeg', dest);
+  sh.cp('-rf', src + '/*.gif', dest);
 };
 
 function getImageFile(name) {
