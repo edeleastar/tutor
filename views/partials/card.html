@@ -1,16 +1,16 @@
 {% macro card (type, contentLink, imgLink, title, objectives) %}
-  <div class="ui card">
+  <a class="ui raised link card" href="{{contentLink}}">
     <div class="content">
         <div class="right floated meta"> <i class="{{type}} large icon"></i></div>
         <div class="header"> {{title}} </div>
     </div>
-    <a href="{{contentLink}}">
+    <div class="image">
       <img class="ui bordered rounded image" src="{{imgLink}}">
-    </a>
+    </div>
     <div class="content">
       <div class="description">
          {{objectives}}
       </div>
     </div>
-  </div>
+  </a>
 {% endmacro %}
