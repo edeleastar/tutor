@@ -1,0 +1,21 @@
+{% import "partials/header.html" as header %}
+{% import "partials/card.html" as card %}
+
+{% extends "main.html" %}
+{% block content %}
+
+{{ header.header("#", icon, title, "Wall") }}
+
+<div class="ui four doubling stackable cards">
+  {% for course in courses %}
+    {% for resource in course.allLabs.resources %}
+      {{ card.card (resource.icon,
+          course.folder + '/'  + resource.parentFolder + '/' + resource.folder + '/' + resource.link,
+          course.folder + '/' + resource.parentFolder + '/' + resource.folder + '/' + resource.img,
+          resource.title,
+          resource.objectivesWithoutHeader) }}
+    {% endfor %}
+  {% endfor %}
+</div>
+
+{% endblock %}}

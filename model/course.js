@@ -42,28 +42,29 @@ class Course extends LearningObject {
       sh.cd('..');
     });
     futils.writeFile(path + '/index.html', nunjucks.render('course.html', this));
+    futils.copyFileToFolder(this.img, path);
     this.publishWalls(path);
   }
 
   publishWalls(path) {
-    var allTalks = {
+    this.allTalks = {
       title: this.title,
       resources: [],
       icon: 'film',
       credits: futils.getCredits(),
     };
-    var allLabs = {
+    this.allLabs = {
       title: this.title,
       resources: [],
       icon: 'lab',
       credits: futils.getCredits(),
     };
     this.topics.forEach(topic => {
-      Array.prototype.push.apply(allLabs.resources, topic.labs);
-      Array.prototype.push.apply(allTalks.resources, topic.talks);
+      Array.prototype.push.apply(this.allLabs.resources, topic.labs);
+      Array.prototype.push.apply(this.allTalks.resources, topic.talks);
     });
-    futils.writeFile(path + '/labwall.html', nunjucks.render('wall.html', allLabs));
-    futils.writeFile(path + '/talkwall.html', nunjucks.render('wall.html', allTalks));
+    futils.writeFile(path + '/labwall.html', nunjucks.render('wall.html', this.allLabs));
+    futils.writeFile(path + '/talkwall.html', nunjucks.render('wall.html', this.allTalks));
   }
 }
 
