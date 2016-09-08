@@ -59,7 +59,7 @@ git clone https://github.com/edeleastar/tutor.git
 Finally, from inside the folder you just cloned, enter the following command:
 
 ~~~
-npm install -g
+npm install -g --no-optional
 ~~~
 
 ## Commands
