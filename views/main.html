@@ -25,20 +25,15 @@
 
   <body>
 
-    {% import "partials/header.html"  as header %}
+    <div class="ui container">
+      {% block content %}
+      {% endblock %}
+    </div>
 
-
-
-  <div class="ui container">
-    {% block content %}
-    {% endblock %}
-   </div>
-
-   {% include  "partials/credits.html" %}
+    {% include  "partials/credits.html" %}
 
     <script>
       {% include "js/main.js" %}
-
     </script>
 
   </body>

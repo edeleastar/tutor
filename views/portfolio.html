@@ -1,0 +1,18 @@
+{% import "partials/portfolioheader.html" as header %}
+{% import "partials/card.html" as card %}
+
+{% extends "main.html" %}
+{% block content %}
+
+{{ header.header("#", "sitemap", title, "Topics") }}
+
+
+<div class="ui four doubling stackable cards">
+
+  {% for course in courses %}
+  {{ card.card ("sitemap", "./" + course.folder + "/index.html", "./" + course.folder + "/" + course.img, course.title, course.objectivesWithoutHeader) }}
+  {% endfor %}
+
+</div>
+
+{% endblock %}

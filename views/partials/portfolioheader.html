@@ -1,0 +1,31 @@
+{% macro header(parent, type, title, subtitle) %}
+<header class="ui middle aligned center aligned stackable grid segment">
+  <a class="ui blue left corner label">
+    <i class="{{type}} big  icon"></i>
+  </a>
+  <div class="eight wide center aligned column">
+    <h2 class="headder">    {{title}} </h2>
+  </div>
+  <div class="one wide column sitemap">
+    <div class="popup" data-content="Top Level Topic View">
+      <a href="index.html"> <i class="big sitemap icon"></i> sections </a>
+    </div>
+  </div>
+  <div class="one wide column">
+    <div class="popup" data-content="All Presentations">
+      <a href="talkwall.html"> <i class="big film icon"></i>  all slides </a>
+    </div>
+  </div>
+  <div class="one wide column">
+    <div class="popup" data-content="All Labs">
+      <a href="labwall.html"> <i class="big lab icon"></i> all labs </a>
+    </div>
+  </div>
+  <div class="five wide column">
+    <img class="ui centered medium image" src="http://www.wit.ie/assets/images/wit_crest.png">
+  </div>
+</header>
+<script>
+  $('.popup').popup();
+</script>
+{% endmacro %}

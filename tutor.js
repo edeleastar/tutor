@@ -8,13 +8,17 @@ const futils = require('./utils/futils');
 const Lab = require('./model/lab').Lab;
 const Topic = require('./model/topic').Topic;
 const Course = require('./model/course.js').Course;
+const Portfolio = require('./model/portfolio.js').Portfolio;
 const nunjucks = require('nunjucks');
 
 const root = __dirname;
 nunjucks.configure(root + '/views', { autoescape: false });
 nunjucks.installJinjaCompat();
 
-if (fs.existsSync('course.md')) {
+if (fs.existsSync('portfolio.md')) {
+  const portfolio = new Portfolio('portfolio');
+  portfolio.publish('public-site');
+} else if (fs.existsSync('course.md')) {
   const course = new Course('course');
   course.publish('public-site');
 } else if (fs.existsSync('topic.md')) {
