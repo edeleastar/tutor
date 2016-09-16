@@ -10,14 +10,16 @@ const Topic = require('./topic.js').Topic;
 const nunjucks = require('nunjucks');
 
 class Course extends LearningObject {
-  constructor(pattern) {
+  constructor(pattern, ignoreOff) {
     super(pattern);
     this.topics = this.harvestTopics(glob.sync('topic*').sort());
     this.credits = futils.getCredits();
     this.url = futils.getCourseUrl();
-    const ignoreTopic = futils.getIgnoreList();
-    if (ignoreTopic) this.topics =
-        this.topics.filter(topic => ignoreTopic.indexOf(topic.folder) == -1);
+    if (!ignoreOff) {
+      const ignoreTopic = futils.getIgnoreList();
+      if (ignoreTopic) this.topics =
+          this.topics.filter(topic => ignoreTopic.indexOf(topic.folder) == -1);
+    }
   }
 
   harvestTopics(topicsList) {
