@@ -6,11 +6,18 @@
 
 <div class="ui segment pushable">
   <div class="ui inverted labeled icon left inline vertical sidebar menu">
-    {% for resource in resources %}
-      <a class="item" href="{{resource.folder}}/{{resource.link}}">
-        {{resource.title}}
+    <div class="header">
+      <a class="item" href="#">
+        {{title}}
       </a>
-    {% endfor %}
+    </div>
+    <div class="menu">
+      {% for resource in resources %}
+        <a class="item" href="{{resource.folder}}/{{resource.link}}">
+          {{resource.title}}
+        </a>
+      {% endfor %}
+    </div>
   </div>
 
   <div class="pusher">
