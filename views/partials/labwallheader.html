@@ -1,4 +1,4 @@
-{% macro header(parent, type, title, subtitle, credits) %}
+{% macro labwallheader(parent, type, title, subtitle, credits) %}
 
 {% import "elements/walllinks.html" as walllinks %}
 {% import "elements/topics.html" as topics %}
@@ -8,10 +8,10 @@
 
   <div class="seven wide center aligned column">
     <h2 class="headder"> {{title}}</h2>
-    <p> Top Level Topics </p>
+    <p> All Labs in the Course </p>
   </div>
 
-  {{ topics.topics ("#") }}
+  {{ topics.topics ("index.html") }}
   {{ walllinks.walllinks ("talkwall.html", "labwall.html") }}
 
   {% include "elements/crest.html" %}

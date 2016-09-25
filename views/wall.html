@@ -1,4 +1,5 @@
-{% import "partials/header.html" as header %}
+{% import "partials/talkwallheader.html" as talkwallheader %}
+{% import "partials/labwallheader.html" as labwallheader %}
 {% import "partials/card.html" as card %}
 
 {% extends "main.html" %}
@@ -14,7 +15,11 @@
   </div>
   <div class="pusher">
     <div class="ui basic segment">
-      {{ header.header("#", icon, title, "Wall") }}
+      {% if icon == 'lab'  %}
+        {{ labwallheader.labwallheader("#", icon, title, "Wall") }}
+      {% else %}
+        {{ talkwallheader.talkwallheader("#", icon, title, "Wall") }}
+      {% endif %}
       <div class="ui four doubling stackable cards">
         {% for resource in resources %}
         {{ card.card (resource.icon,
