@@ -1,10 +1,13 @@
-{% macro header(parent, type, title, subtitle) %}
+{% macro header(parent, type, title, subtitle, credits) %}
   <header class="ui middle aligned center aligned stackable grid segment">
     <a class="ui blue left corner label">
-      <i class="{{type}} big  icon"></i>
+      <div id="showTOC" class="popup" data-content="Reveal TOC">
+        <i id="toc" class="{{type}} big  icon"></i>
+      </div>
     </a>
     <div class="eight wide center aligned column">
-      <h2 class="headder">    {{title}} </h2>
+      <h2 class="headder">  {{title}}</h2>
+      <p>  {{credits}} </p>
     </div>
     <div class="one wide column sitemap">
       <div class="popup" data-content="Top Level Topic View">
@@ -25,10 +28,4 @@
       <img class="ui centered medium image" src="http://www.wit.ie/assets/images/wit_crest.png">
     </div>
   </header>
-
-<script>
-  $('.popup')
-  .popup()
-;
-</script>
 {% endmacro %}

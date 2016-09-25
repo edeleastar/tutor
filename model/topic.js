@@ -43,7 +43,7 @@ class Topic extends LearningObject {
     return labs;
   }
 
-  publish(path) {
+  publish(path, course) {
     const basePath = '../' + path + '/' + this.folder;
     futils.initEmptyPath(basePath);
 
@@ -58,7 +58,7 @@ class Topic extends LearningObject {
 
     console.log(this.title);
     this.publishTalks(basePath);
-    this.publishLabs(basePath);
+    this.publishLabs(basePath, course);
   }
 
   publishTalks(path) {
@@ -71,12 +71,12 @@ class Topic extends LearningObject {
     });
   }
 
-  publishLabs(path) {
+  publishLabs(path, course) {
     if (this.labs.length > 0) console.log(' Labs:');
     this.labs.forEach(lab => {
       sh.cd(lab.folder);
       lab.topic = this;
-      lab.publish(path);
+      lab.publish(path, course);
       sh.cd('..');
     });
   }

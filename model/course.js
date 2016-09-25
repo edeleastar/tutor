@@ -38,14 +38,15 @@ class Course extends LearningObject {
       sh.mkdir(path);
     }
 
+    this.publishWalls(path);
     this.topics.forEach(topic => {
       sh.cd(topic.folder);
-      topic.publish(path);
+      topic.publish(path, this);
       sh.cd('..');
     });
     futils.writeFile(path + '/index.html', nunjucks.render('course.html', this));
     futils.copyFileToFolder(this.img, path);
-    this.publishWalls(path);
+
   }
 
   publishWalls(path) {

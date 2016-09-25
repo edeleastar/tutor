@@ -4,16 +4,29 @@
 {% extends "main.html" %}
 {% block content %}
 
-{{ header.header("#", icon, title, "Wall") }}
-
-<div class="ui four doubling stackable cards">
-  {% for resource in resources %}
-  {{ card.card (resource.icon,
-                 resource.parentFolder + '/' + resource.folder + '/' + resource.link,
-                 resource.parentFolder + '/' + resource.folder + '/' + resource.img,
-                 resource.title,
-                 resource.objectivesWithoutHeader) }}
-  {% endfor %}
+<div class="ui bottom attached segment pushable">
+  <div class="ui inverted labeled icon left inline vertical sidebar menu">
+    {% for resource in resources %}
+    <a class="item" href="{{resource.parentFolder}}/{{resource.folder}}/{{resource.link}}">
+      {{resource.title}}
+    </a>
+    {% endfor %}
+  </div>
+  <div class="pusher">
+    <div class="ui basic segment">
+      {{ header.header("#", icon, title, "Wall") }}
+      <div class="ui four doubling stackable cards">
+        {% for resource in resources %}
+        {{ card.card (resource.icon,
+                       resource.parentFolder + '/' + resource.folder + '/' + resource.link,
+                       resource.parentFolder + '/' + resource.folder + '/' + resource.img,
+                       resource.title,
+                       resource.objectivesWithoutHeader) }}
+        {% endfor %}
+      </div>
+      {% include "partials/creditsegment.html" %}
+    </div>
+  </div>
 </div>
 
 {% endblock %}}

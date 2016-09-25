@@ -49,13 +49,14 @@ class Lab extends LearningObject {
     return chapters;
   }
 
-  publish (basepath) {
+  publish (basepath, course) {
     if (this.chapters) console.log('  -->' + this.chapters[0].shortTitle);
     const path = '../' + basepath + '/' + this.folder;
     futils.initEmptyPath(path);
     this.directories.forEach(directory => {
       futils.copyFolder(directory, path + '/');
     });
+    this.course = course;
     futils.writeFile(path + '/index.html', nunjucks.render('lab.html', this));
   }
 }
