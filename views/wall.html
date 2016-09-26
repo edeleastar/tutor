@@ -16,9 +16,9 @@
   <div class="pusher">
     <div class="ui basic segment">
       {% if icon == 'lab'  %}
-        {{ labwallheader.labwallheader("#", icon, title, "Wall") }}
+        {{ labwallheader.labwallheader("#", icon, title, "Wall", credits) }}
       {% else %}
-        {{ talkwallheader.talkwallheader("#", icon, title, "Wall") }}
+        {{ talkwallheader.talkwallheader("#", icon, title, "Wall", credits) }}
       {% endif %}
       <div class="ui four doubling stackable cards">
         {% for resource in resources %}

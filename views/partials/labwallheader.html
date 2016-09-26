@@ -1,10 +1,12 @@
 {% macro labwallheader(parent, type, title, subtitle, credits) %}
 
-{% import "elements/walllinks.html" as walllinks %}
-{% import "elements/topics.html" as topics %}
+{% import "headelements/walllinks.html" as walllinks %}
+{% import "headelements/topics.html" as topics %}
+{% import "headelements/creditsmsg.html" as creditsmsg %}
 
 <header class="ui middle aligned center aligned stackable grid segment">
-  {% include "elements/sidebarlink.html" %}
+
+  {% include "headelements/sidebarlink.html" %}
 
   <div class="seven wide center aligned column">
     <h2 class="headder"> {{title}}</h2>
@@ -12,9 +14,8 @@
   </div>
 
   {{ topics.topics ("index.html") }}
+  {{ creditsmsg.creditsmsg(credits) }}
   {{ walllinks.walllinks ("talkwall.html", "labwall.html") }}
-
-  {% include "elements/crest.html" %}
 
 </header>
 {% endmacro %}

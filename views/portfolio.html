@@ -6,13 +6,11 @@
 
 {{ header.header("#", "sitemap", title, "Topics") }}
 
-
-<div class="ui four doubling stackable cards">
-
-  {% for course in courses %}
-  {{ card.card ("sitemap", "./" + course.folder + "/index.html", "./" + course.folder + "/" + course.img, course.title, course.objectivesWithoutHeader) }}
-  {% endfor %}
-
+<div class="ui container">
+  <div class="ui four doubling stackable cards">
+    {% for course in courses %}
+    {{ card.card ("sitemap", "./" + course.folder + "/index.html", "./" + course.folder + "/" + course.img, course.title, course.objectivesWithoutHeader) }}
+    {% endfor %}
+  </div>
 </div>
-
 {% endblock %}
