@@ -5,6 +5,12 @@
 {% extends "main.html" %}
 {% block content %}
 
+{% if icon == 'lab'  %}
+  {{ labwallheader.labwallheader("#", icon, title, "Wall", credits) }}
+{% else %}
+  {{ talkwallheader.talkwallheader("#", icon, title, "Wall", credits) }}
+{% endif %}
+
 <div class="ui bottom attached segment pushable">
   <div class="ui inverted labeled icon left inline vertical sidebar menu">
     {% for resource in resources %}
@@ -15,11 +21,6 @@
   </div>
   <div class="pusher">
     <div class="ui basic segment">
-      {% if icon == 'lab'  %}
-        {{ labwallheader.labwallheader("#", icon, title, "Wall", credits) }}
-      {% else %}
-        {{ talkwallheader.talkwallheader("#", icon, title, "Wall", credits) }}
-      {% endif %}
       <div class="ui four doubling stackable cards">
         {% for resource in resources %}
         {{ card.card (resource.icon,

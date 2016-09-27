@@ -4,6 +4,8 @@
 {% extends "main.html" %}
 {% block content %}
 
+{{ topicheader.topicheader("../index.html", "glyphicon-chevron-left", title, "", credits) }}
+
 <div class="ui segment pushable">
   <div class="ui inverted labeled icon left inline vertical sidebar menu">
     <div class="header">
@@ -22,10 +24,7 @@
 
   <div class="pusher">
     <div class="ui basic segment">
-      {{ topicheader.topicheader("../index.html", "glyphicon-chevron-left", title, "", credits) }}
-
       <div class="ui four doubling stackable cards">
-
         {% for resource in resources %}
         {{ card.card (resource.icon,
                       resource.folder + '/' + resource.link,
@@ -34,7 +33,6 @@
         {% endfor %}
 
       </div>
-
     </div>
    </div>
 </div>

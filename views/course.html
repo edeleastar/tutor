@@ -4,6 +4,8 @@
 {% extends "main.html" %}
 {% block content %}
 
+{{ header.header("#", "sitemap", title, "Topics", credits) }}
+
 <div class="ui segment pushable">
   <div class="ui inverted inline vertical sidebar menu">
     {% for topic in topics %}
@@ -24,7 +26,6 @@
   </div>
   <div class="pusher">
     <div class="ui basic segment">
-      {{ header.header("#", "sitemap", title, "Topics", credits) }}
       <div class="ui four doubling stackable cards">
         {% for topic in topics %}
           {{ card.card ("sitemap", "./" + topic.folder + "/index.html", "./" + topic.folder + "/" + topic.img, topic.title, topic.objectivesWithoutHeader) }}
