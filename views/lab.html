@@ -5,6 +5,21 @@
   {% include "css/lab.css" %}
 </style>
 
+<div class="ui fixed top pointing inverted menu labmenu">
+  <header class="header item">
+    <i id="toc" class="sitemap icon"></i>
+    <a href="../index.html">
+      {{topic.title}}
+    </a>
+  </header>
+  <div class="right tab-menu menu">
+    {% for chapter in chapters %}
+    <a class="item" data-tab="{{chapter.shortTitle}}">
+      {{chapter.shortTitle}}
+    </a>
+    {% endfor %}
+  </div>
+</div>
 
 <div class="ui segment pushable">
   <div class="ui inverted labeled icon left inline vertical sidebar menu">
@@ -22,25 +37,7 @@
   </div>
   <div class="pusher">
     <div class="ui basic segment">
-
-      <div class="ui fixed top pointing inverted menu labmenu">
-        <header class="header item">
-          <i id="toc" class="sitemap icon"></i>
-          <a href="../index.html">
-            {{topic.title}}
-          </a>
-        </header>
-        <div class="right tab-menu menu">
-          {% for chapter in chapters %}
-            <a class="item" data-tab="{{chapter.shortTitle}}">
-              {{chapter.shortTitle}}
-            </a>
-          {% endfor %}
-          </div>
-      </div>
-
-      <br><br>
-
+      <br>
       {% for chapter in chapters %}
       <div  class="ui tab segment lab" data-tab="{{chapter.shortTitle}}">
         {{ chapter.content }}
