@@ -50,18 +50,16 @@ First install the latest node.js:
 
 - <https://nodejs.org>
 
-Then, clone this repo:
+Then, use the standard npm install command:
 
 ~~~
-git clone https://github.com/edeleastar/tutor.git
+npm install tutors -g
 ~~~
 
-Finally, from inside the folder you just cloned, enter the following command:
+Note: on some older windows systems, if the above gives an error, then you may need to use a slightly extended command:
 
 ~~~
-
-npm install
-npm install -g --no-optional
+npm install tutors -g --no-optional
 ~~~
 
 ## Commands
@@ -76,7 +74,7 @@ Change into the folder containing the cloned repo and run `tutor`:
 
 ~~~
 cd tutor-example-course
-tutor
+tutors
 ~~~
 
 If all goes smoothly, you should see on the console a list of the topics as they are generated for the sample course:
@@ -113,7 +111,7 @@ The site will be generated into a folder called `public-site` in the same folder
 
  - <http://edeleastar.github.io/tutor-example-site>
 
-The `tutor` command is context sensetive, so will build the complete course if run from the top level, a single topic (with all its talks and labs) if run from within a topic folder, and it will build a single book/lab if run from in a book folder.
+The `tutors` command is context sensetive, so will build the complete course if run from the top level, a single topic (with all its talks and labs) if run from within a topic folder, and it will build a single book/lab if run from in a book folder.
 
 ##Course Web Source File Structure
 
@@ -209,6 +207,3 @@ In addition to a `index.html` file generated for each topic, two companion files
 These work in tandem to facilitate content embedding. `indexmoodle.html` is a paired down version of the topic, with protocol neutral headers and absolute urls to contained talks + labs. `ajaxlabel.html` is a page fragment which fetches indexmoodle via an ajax call, and renders it in a bootstrap container (for moodle). Typically, this is pasted into a `topic` resource in moodle, and will serve the topic seamlessly in place.
 
 The above mechanism requires you to provide the url of the hosted course web - as the url is stitched into both files by tutor. You provide this in a file called 'courseurl' in the root folder of the course. See the example above for this procedure in action.
-
-
-
