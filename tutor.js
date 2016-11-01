@@ -2,6 +2,8 @@
 
 'use strict';
 
+const version = require('./package.json').version;
+
 const fs = require('fs');
 const glob = require('glob');
 const futils = require('./utils/futils');
@@ -17,9 +19,11 @@ nunjucks.configure(root + '/views', { autoescape: false });
 nunjucks.installJinjaCompat();
 
 program.arguments('<file>')
+    .version(version)
     .option('-p, --private', 'Generate full private site')
     .parse(process.argv);
 
+console.log('tutors course web generator: ' + version);
 if (fs.existsSync('portfolio.md')) {
   const portfolio = new Portfolio('portfolio');
   portfolio.publish('public-site');
