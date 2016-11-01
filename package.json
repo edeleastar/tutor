@@ -13,7 +13,7 @@
     "url": "https://github.com/edeleastar/tutor.git"
   },
   "bin": {
-    "tutor": "./tutor.js"
+    "tutors": "./tutor.js"
   },
   "dependencies": {
     "commander": "^2.9.0",
