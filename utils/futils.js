@@ -64,6 +64,7 @@ module.exports.copyTalk = function (src, dest) {
   dest =  dest + src;
   sh.mkdir('-p', dest);
   sh.cp('-rf', src + '/*.pdf', dest);
+  sh.cp('-rf', src + '/*.zip', dest);
   sh.cp('-rf', src + '/*.png', dest);
   sh.cp('-rf', src + '/*.jpg', dest);
   sh.cp('-rf', src + '/*.jpeg', dest);

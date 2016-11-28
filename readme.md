@@ -207,3 +207,7 @@ In addition to a `index.html` file generated for each topic, two companion files
 These work in tandem to facilitate content embedding. `indexmoodle.html` is a paired down version of the topic, with protocol neutral headers and absolute urls to contained talks + labs. `ajaxlabel.html` is a page fragment which fetches indexmoodle via an ajax call, and renders it in a bootstrap container (for moodle). Typically, this is pasted into a `topic` resource in moodle, and will serve the topic seamlessly in place.
 
 The above mechanism requires you to provide the url of the hosted course web - as the url is stitched into both files by tutor. You provide this in a file called 'courseurl' in the root folder of the course. See the example above for this procedure in action.
+
+## 1.0.3 Update
+
+Talks can now be a simple zip file (+ .md and .png files). This can be useful for distributing documents, templates or other assets.

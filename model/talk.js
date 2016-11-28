@@ -9,10 +9,17 @@ const LearningObject = require('./learningobject.js').LearningObject;
 
 class Talk extends LearningObject {
   constructor(pattern, topic) {
-    let pdfs = glob.sync('*.pdf').sort();
-    if (pdfs.length === 0) pdfs = ['error: missing pdf'];
-    super(path.parse(pdfs[0]).name);
-    this.link = pdfs[0];
+    let resourceList = glob.sync('*.pdf').sort();
+    if (resourceList.length === 0) {
+      resourceList = glob.sync('*.zip').sort();
+      if (resourceList.length === 0) {
+        resourceList = ['error: missing pdf'];
+      }
+    }
+    const resource = resourceList[0];
+
+    super(path.parse(resource).name);
+    this.link = resource;
     this.parentFolder = futils.getParentFolder();
     this.icon = 'film';
   }
