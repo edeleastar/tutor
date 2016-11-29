@@ -1,4 +1,4 @@
-{% macro card (type, contentLink, imgLink, title, objectives) %}
+{% macro card (type, contentLink, imgLink, title, objectives, extra) %}
   <a class="ui raised link card" href="{{contentLink}}">
     <div class="content">
         <div class="right floated meta"> <i class="{{type}} large icon"></i></div>
@@ -12,5 +12,10 @@
          {{objectives}}
       </div>
     </div>
+    {% if extra %}
+    <div class="extra content center aligned">
+       {{extra}}
+    </div>
+    {% endif %}
   </a>
 {% endmacro %}
