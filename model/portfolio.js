@@ -9,23 +9,23 @@ const LearningObject = require('./learningobject.js').LearningObject;
 const Course = require('./course.js').Course;
 const nunjucks = require('nunjucks');
 
+const YAML = require('yamljs');
+
 class Portfolio extends LearningObject {
   constructor(pattern) {
     super(pattern);
-    this.courses = this.harvestCourses(glob.sync('course*').sort());
-    this.credits = futils.getCredits();
-    this.url = futils.getCourseUrl();
-  }
 
-  harvestCourses(coursesList) {
-    const courses = [];
-    coursesList.forEach(courseName => {
-      sh.cd(courseName);
-      const course = new Course('course');
-      if (course) courses.push(course);
-      sh.cd('..');
-    });
-    return courses;
+    this.yaml = YAML.load('./portfolio.yaml');
+    for (let courseGroup of this.yaml.courseGroups) {
+      courseGroup.courses = [];
+      for (let module of courseGroup.modules) {
+        console.log(module);
+        sh.cd(module);
+        const course = new Course('course');
+        if (course) courseGroup.courses.push(course);
+        sh.cd('..');
+      }
+    }
   }
 
   publish(path) {
@@ -33,12 +33,15 @@ class Portfolio extends LearningObject {
       sh.mkdir(path);
     }
 
-    this.courses.forEach(course => {
-      sh.cd(course.folder);
-      course.publish('../' + path + '/' + course.folder);
-      sh.cd('..');
-    });
-    futils.writeFile(path + '/index.html', nunjucks.render('portfolio.html', this));
+    for (let courseGroup of this.yaml.courseGroups) {
+      for (let course of courseGroup.courses) {
+        sh.cd(course.folder);
+        course.publish('../' + path + '/' + course.folder);
+        sh.cd('..');
+      }
+    }
+
+    futils.writeFile(path + '/index.html', nunjucks.render('portfolio.html', this.yaml));
   }
 }
 

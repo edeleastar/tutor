@@ -4,13 +4,29 @@
 {% extends "main.html" %}
 {% block content %}
 
-{{ header.header("#", "sitemap", title, "Topics") }}
+{{ header.header("#", "sitemap", title, "", credits) }}
 
-<div class="ui container">
-  <div class="ui four doubling stackable cards">
-    {% for course in courses %}
-    {{ card.card ("sitemap", "./" + course.folder + "/index.html", "./" + course.folder + "/" + course.img, course.title, course.objectivesWithoutHeader, course.credits) }}
-    {% endfor %}
+<div class="ui">
+  {% for courseGroup in courseGroups %}
+  <div class="ui raised grid stackable paded segment">
+    <div class="ui middle aligned center aligned four wide column">
+      <div class="ui header">
+        {{courseGroup.title}}
+      </div>
+      <p>
+        {{courseGroup.description}}
+      </p>
+    </div>
+    <div class="ui twelve wide column">
+      <div class="ui stackable cards">
+        {% for course in courseGroup.courses %}
+        {{ card.card ("sitemap", "./" + course.folder + "/index.html", "./" + course.folder + "/" + course.img,
+        course.title, course.objectivesWithoutHeader, course.credits) }}
+        {% endfor %}
+      </div>
+    </div>
   </div>
+  {% endfor %}
 </div>
+
 {% endblock %}

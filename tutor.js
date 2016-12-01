@@ -24,7 +24,7 @@ program.arguments('<file>')
     .parse(process.argv);
 
 console.log('tutors course web generator: ' + version);
-if (fs.existsSync('portfolio.md')) {
+if (fs.existsSync('portfolio.yaml')) {
   const portfolio = new Portfolio('portfolio');
   portfolio.publish('public-site');
 } else if (fs.existsSync('course.md')) {
