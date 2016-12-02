@@ -4,11 +4,13 @@
 {% extends "main.html" %}
 {% block content %}
 
-{{ header.header("#", "sitemap", title, "", credits) }}
+{{ header.header("#", "", title, "", credits) }}
+
+{% if courseGroups[0].description %}
 
 <div class="ui">
   {% for courseGroup in courseGroups %}
-  <div class="ui raised grid stackable paded segment">
+  <div class="ui raised grid stackable padded segment">
     <div class="ui middle aligned center aligned four wide column">
       <div class="ui header">
         {{courseGroup.title}}
@@ -28,5 +30,25 @@
   </div>
   {% endfor %}
 </div>
+
+{% else %}
+
+
+{% for courseGroup in courseGroups %}
+<div class="ui stacked center aligned segments">
+  <div class="ui center aligned blue inverted segment">
+    {{courseGroup.title}}
+  </div>
+  <div class="ui center aligned stackable cards segment">
+    {% for course in courseGroup.courses %}
+    {{ card.card ("sitemap", "./" + course.folder + "/index.html", "./" + course.folder + "/" + course.img,
+    course.title, course.objectivesWithoutHeader, course.credits) }}
+    {% endfor %}
+  </div>
+</div>
+{% endfor %}
+
+
+{% endif %}
 
 {% endblock %}
