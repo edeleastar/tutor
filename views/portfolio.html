@@ -35,7 +35,7 @@
 
 {% for courseGroup in courseGroups %}
 <div class="ui raised stackable segment container">
-  <a class="ui teal left ribbon large label">{{courseGroup.title}}</a>
+  <a class="ui blue left ribbon large label">{{courseGroup.title}}</a>
   <div class="ui centered stackable cards">
     {% for course in courseGroup.courses %}
     {{ card.card ("sitemap", "./" + course.folder + "/index.html", "./" + course.folder + "/" + course.img,
