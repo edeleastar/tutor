@@ -19,11 +19,15 @@ class Portfolio extends LearningObject {
     for (let courseGroup of this.yaml.courseGroups) {
       courseGroup.courses = [];
       for (let module of courseGroup.modules) {
-        console.log(module);
-        sh.cd(module);
-        const course = new Course('course');
-        if (course) courseGroup.courses.push(course);
-        sh.cd('..');
+        if (fs.existsSync(module)) {
+          console.log('- ' + module);
+          sh.cd(module);
+          const course = new Course('course');
+          if (course) courseGroup.courses.push(course);
+          sh.cd('..');
+        } else {
+          console.log('- could not find ' + module);
+        }
       }
     }
   }
