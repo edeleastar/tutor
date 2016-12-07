@@ -3,21 +3,22 @@
 'use strict';
 
 const version = require('./package.json').version;
+const program = require('commander');
 
 const fs = require('fs');
-var sh = require('shelljs');
+const sh = require('shelljs');
 const glob = require('glob');
 const futils = require('./utils/futils');
+
+const nunjucks = require('nunjucks');
+const root = __dirname;
+nunjucks.configure(root + '/views', {autoescape: false});
+nunjucks.installJinjaCompat();
+
 const Lab = require('./model/lab').Lab;
 const Topic = require('./model/topic').Topic;
 const Course = require('./model/course.js').Course;
 const Portfolio = require('./model/portfolio.js').Portfolio;
-const nunjucks = require('nunjucks');
-var program = require('commander');
-
-const root = __dirname;
-nunjucks.configure(root + '/views', { autoescape: false });
-nunjucks.installJinjaCompat();
 
 program.arguments('<file>')
     .version(version)
@@ -26,16 +27,29 @@ program.arguments('<file>')
     .parse(process.argv);
 
 if (program.new) {
+  versionCmd();
+  newCmd();
+} else {
+  versionCmd();
+  inferCommand()
+}
+
+function versionCmd() {
+  console.log('tutors course web generator: ' + version);
+}
+
+function newCmd() {
   console.log('Creating new template course...');
-  if (sh.exec('git clone https://github.com/edeleastar/tutors-starter.git', { silent: false }).code !== 0) {
+  if (sh.exec('git clone https://github.com/edeleastar/tutors-starter.git', {silent: false}).code !== 0) {
     console.log('fix this and try again?');
   } else {
     console.log('Next steps...');
-    console.log('Cd into "tutors-starter" and run "tutors" again');
+    console.log('cd into "tutors-starter" and run "tutors" again');
     console.log('This will generate the course web in "tutors-starter/public-site"');
   }
-} else {
-  console.log('tutors course web generator: ' + version);
+}
+
+function inferCommand() {
   if (fs.existsSync('portfolio.yaml')) {
     const portfolio = new Portfolio('portfolio');
     portfolio.publish('public-site');
