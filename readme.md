@@ -3,13 +3,48 @@ tutors
 
 ## Introduction
 
-A static web site generator for producing course web sites from largely markdown content. For example this site here is generated using this tool:
+A static web site generator for producing course web sites from largely markdown content. For example this site here is generated using this tool.
 
  - <http://edeleastar.github.io/tutor-example-site>
 
-The above course web is produced automatically from this `source` repository:
+Here is a portfolio of courses:
 
- - <https://github.com/edeleastar/tutor-example-course>
+- <https://wit-tutors.github.io/modules>
+
+## Quick Start
+
+Make sure you have node.js installed. 
+
+- <https://nodejs.org/en/>
+
+Normally the LTS version would be the most suitable. Open a shell and enter this command. You should also have git installed:
+
+- <https://git-scm.com/>
+
+On windows, it is often easier to make sure git is integrated into the standard command prompt commands (an option when installing git).
+
+Once these are installed, enter this command:
+
+~~~
+npm install tutors -g
+~~~
+
+Now, to create a template course, enter this command:
+
+~~~
+tutors new
+~~~
+
+This will create a new course, populated with some template talks, resources and labs. The course is in markdown source format. To build, enter the following:
+
+~~~
+cd tutors-starter
+tutors
+~~~
+
+A folder called './public-site' will be generated containing a html site of the course.
+
+## More Detail...
 
 The structure of the site follows a set of filename and folder nested conventions to layout topics, labs and talks:
 
