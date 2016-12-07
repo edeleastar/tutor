@@ -17,11 +17,11 @@ Make sure you have node.js installed.
 
 - <https://nodejs.org/en/>
 
-Normally the LTS version would be the most suitable. Open a shell and enter this command. You should also have git installed:
+Normally the LTS version would be the most suitable. You should also have git installed:
 
 - <https://git-scm.com/>
 
-On windows, it is often easier to make sure git is integrated into the standard command prompt commands (an option when installing git).
+On windows, it is often easier to make sure git is integrated into the standard command prompt (an option when installing git on windows).
 
 Once these are installed, enter this command:
 
@@ -29,13 +29,13 @@ Once these are installed, enter this command:
 npm install tutors -g
 ~~~
 
-Now, to create a template course, enter this command:
+This will install the tutors command globally on your workstation. Now, to create a starter template course, enter this command:
 
 ~~~
 tutors new
 ~~~
 
-This will create a new course, populated with some template talks, resources and labs. The course is in markdown source format. To build, enter the following:
+This will create a new course, populated with some template talks, resources and labs. To build the course, enter the following:
 
 ~~~
 cd tutors-starter
