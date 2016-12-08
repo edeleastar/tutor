@@ -1,7 +1,8 @@
-{% macro header(parent, type, title, subtitle, credits) %}
+{% macro header(parent, type, title, subtitle, credits, portfolio) %}
 
 {% import "headelements/walllinks.html" as walllinks %}
 {% import "headelements/topics.html" as topics %}
+{% import "headelements/portfoliolink.html" as portfoliolink %}
 {% import "headelements/creditsmsg.html" as creditsmsg %}
 
 <header class="ui middle aligned center aligned stackable grid segment">
@@ -13,7 +14,11 @@
     <p> Top Level Topics </p>
   </div>
 
-  {{ topics.topics ("#") }}
+
+  {% if portfolio %}
+    {{ portfoliolink.portfoliolink ("../index.html") }}
+  {% endif %}
+
   {{ creditsmsg.creditsmsg(credits) }}
 
   {{ walllinks.walllinks ("talkwall.html", "labwall.html") }}
