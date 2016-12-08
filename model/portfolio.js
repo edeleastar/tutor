@@ -40,7 +40,7 @@ class Portfolio extends LearningObject {
     for (let courseGroup of this.yaml.courseGroups) {
       for (let course of courseGroup.courses) {
         sh.cd(course.folder);
-        course.publish('../' + path + '/' + course.folder);
+        course.publish('../' + path + '/' + course.folder, true);
         sh.cd('..');
       }
     }

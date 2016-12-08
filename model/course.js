@@ -33,7 +33,7 @@ class Course extends LearningObject {
     return topics;
   }
 
-  publish(path) {
+  publish(path, isInPortfolio) {
     if (!fs.existsSync(path)) {
       sh.mkdir(path);
     }
@@ -44,6 +44,7 @@ class Course extends LearningObject {
       topic.publish(path, this);
       sh.cd('..');
     });
+    this.portfolio = isInPortfolio;
     futils.writeFile(path + '/index.html', nunjucks.render('course.html', this));
     futils.copyFileToFolder(this.img, path);
 

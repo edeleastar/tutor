@@ -12,7 +12,7 @@ const futils = require('./utils/futils');
 
 const nunjucks = require('nunjucks');
 const root = __dirname;
-nunjucks.configure(root + '/views', {autoescape: false});
+nunjucks.configure(root + '/views', { autoescape: false });
 nunjucks.installJinjaCompat();
 
 const Lab = require('./model/lab').Lab;
@@ -31,7 +31,7 @@ if (program.new) {
   newCmd();
 } else {
   versionCmd();
-  inferCommand()
+  inferCommand();
 }
 
 function versionCmd() {
@@ -40,13 +40,16 @@ function versionCmd() {
 
 function newCmd() {
   console.log('Creating new template course...');
-  if (sh.exec('git clone https://github.com/edeleastar/tutors-starter.git', {silent: false}).code !== 0) {
+  const courseFolderNames = generateCourseFolderNames();
+  const folder = courseFolderNames[courseFolderNames.length - 1];
+  updateYaml(courseFolderNames);
+  if (sh.exec(`git clone https://github.com/edeleastar/tutors-starter.git ${folder}`, { silent: false }).code !== 0) {
     console.log('fix this and try again?');
-  } else {
-    console.log('Next steps...');
-    console.log('cd into "tutors-starter" and run "tutors" again');
-    console.log('This will generate the course web in "tutors-starter/public-site"');
   }
+
+  console.log('Next steps...');
+  console.log(`cd into ${folder} and run "tutors" again`);
+  console.log('This will generate the course web in "tutors-starter/public-site"');
 }
 
 function inferCommand() {
@@ -55,10 +58,10 @@ function inferCommand() {
     portfolio.publish('public-site');
   } else if (fs.existsSync('course.md')) {
     const course = new Course('course');
-    course.publish('public-site');
+    course.publish('public-site', false);
     if (program.private) {
       const privateCourse = new Course('course', true);
-      privateCourse.publish('private-site');
+      privateCourse.publish('private-site', false);
     }
   } else if (fs.existsSync('topic.md')) {
     const topic = new Topic('topic');
@@ -69,4 +72,40 @@ function inferCommand() {
   } else {
     console.log('Unable to detect lab, topic or course');
   }
+}
+
+function generateCourseFolderNames() {
+
+  const remoteRepoPartial = 'tutors-starter-';
+  let i = 0;
+  const allCourseNames = [];
+  let freeNameFound = false;
+  while (!freeNameFound) {
+    const courseName = `${remoteRepoPartial}${i}.git`;
+    if (fs.existsSync(courseName)) {
+      i++;
+    } else {
+      freeNameFound = true;
+    }
+
+    allCourseNames.push(courseName);
+  }
+
+  return allCourseNames;
+}
+
+function updateYaml(folderNames) {
+  let yaml = `
+title: 'A collection of recent Modules in Modern Computer Science'
+credits: 'Department of Computing & Mathematics, WIT'
+courseGroups:
+  - title: 'Module Group Label'
+    modules:
+`;
+  for (const folder of folderNames) {
+    yaml += `      - ${folder}
+`;
+  }
+
+  fs.writeFileSync('portfolio.yaml', yaml);
 }
