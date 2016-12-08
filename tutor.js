@@ -81,7 +81,7 @@ function generateCourseFolderNames() {
   const allCourseNames = [];
   let freeNameFound = false;
   while (!freeNameFound) {
-    const courseName = `${remoteRepoPartial}${i}.git`;
+    const courseName = `${remoteRepoPartial}${i}`;
     if (fs.existsSync(courseName)) {
       i++;
     } else {
