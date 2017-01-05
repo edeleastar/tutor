@@ -102,7 +102,7 @@ module.exports.getImageFile = function (name) {
 
 module.exports.getIgnoreList = function () {
   if (fs.existsSync('mbignore')) {
-    var array = fs.readFileSync('mbignore').toString().split(' ');
+    var array = fs.readFileSync('mbignore').toString().split('\n');
     return array;
   } else {
     return null;
