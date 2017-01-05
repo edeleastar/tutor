@@ -34,6 +34,7 @@ class Lab extends LearningObject {
 
   harvestChapters(mdFiles) {
     const chapters = [];
+    this.pages = [];
     mdFiles.forEach(chapterName => {
       const chapter = {
         file: chapterName,
@@ -43,13 +44,17 @@ class Lab extends LearningObject {
         content: mdutils.parse(chapterName),
         contentWithoutHeader: mdutils.parseWithoutHeader(chapterName),
       };
-      chapters.push(chapter);
+      if (chapter.shortTitle !== '.') {
+        chapters.push(chapter);
+      } else {
+        this.pages.push(chapter);
+      }
     });
     this.title = chapters[0].shortTitle;
     return chapters;
   }
 
-  publish (basepath, course) {
+  publish(basepath, course) {
     if (this.chapters) console.log('  -->' + this.chapters[0].shortTitle);
     const path = '../' + basepath + '/' + this.folder;
     futils.initEmptyPath(path);
@@ -58,6 +63,10 @@ class Lab extends LearningObject {
     });
     this.course = course;
     futils.writeFile(path + '/index.html', nunjucks.render('lab.html', this));
+    this.pages.forEach(page => {
+      const fileName = '/' + page.file.substr(0, page.file.lastIndexOf('.')) + '.html';
+      futils.writeFile(path + fileName, nunjucks.render('page.html', page));
+    });
   }
 }
 

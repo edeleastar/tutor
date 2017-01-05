@@ -13,6 +13,8 @@ $(document).ready(function () {
     }
   });
 
+  $('.ui.embed').embed();
+
   $('.ui.menu .item')
       .tab({
         history: true,
