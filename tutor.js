@@ -24,6 +24,7 @@ program.arguments('<file>')
     .version(version)
     .option('-p, --private', 'Generate full private site')
     .option('-n, --new', 'Create a template course')
+    .option('-s, --standalone', 'Generate standalons site')
     .parse(process.argv);
 
 if (program.new) {
@@ -56,12 +57,17 @@ function inferCommand() {
   if (fs.existsSync('portfolio.yaml')) {
     const portfolio = new Portfolio('portfolio');
     portfolio.publish('public-site');
-  } else if (fs.existsSync('course.md')) {
+  } else if (fs.existsSync('course.md')) {    futils.copyFolder('./views/assets', './standalone-site');
     const course = new Course('course');
     course.publish('public-site', false);
     if (program.private) {
       const privateCourse = new Course('course', true);
       privateCourse.publish('private-site', false);
+    }
+    if (program.standalone) {
+      futils.copyFolder(`${root}/views/assets`, './standalone-site');
+      const standaloneCourse = new Course('course', true);
+      standaloneCourse.publish('standalone-site', false, true);
     }
   } else if (fs.existsSync('topic.md')) {
     const topic = new Topic('topic');

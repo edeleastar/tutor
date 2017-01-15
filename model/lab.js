@@ -55,6 +55,8 @@ class Lab extends LearningObject {
   }
 
   publish(basepath, course) {
+    this.standalone = course.standalone;
+
     if (this.chapters) console.log('  -->' + this.chapters[0].shortTitle);
     const path = '../' + basepath + '/' + this.folder;
     futils.initEmptyPath(path);

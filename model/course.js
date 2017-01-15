@@ -30,11 +30,11 @@ class Course extends LearningObject {
     return topics;
   }
 
-  publish(path, isInPortfolio) {
+  publish(path, isInPortfolio, standalone) {
     if (!fs.existsSync(path)) {
       sh.mkdir(path);
     }
-
+    this.standalone = standalone;
     this.publishWalls(path);
     this.topics.forEach(topic => {
       sh.cd(topic.folder);
@@ -53,12 +53,14 @@ class Course extends LearningObject {
       resources: [],
       icon: 'film',
       credits: futils.getCredits(),
+      standalone: this.standalone,
     };
     this.allLabs = {
       title: this.title,
       resources: [],
       icon: 'lab',
       credits: futils.getCredits(),
+      standalone: this.standalone,
     };
     this.topics.forEach(topic => {
       Array.prototype.push.apply(this.allLabs.resources, topic.labs);

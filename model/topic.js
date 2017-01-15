@@ -45,6 +45,7 @@ class Topic extends LearningObject {
 
   publish(path, course) {
     const basePath = '../' + path + '/' + this.folder;
+    this.standalone = course.standalone;
     futils.initEmptyPath(basePath);
 
     this.resources = this.talks.concat(this.labs);
