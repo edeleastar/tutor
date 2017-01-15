@@ -57,7 +57,7 @@ function inferCommand() {
   if (fs.existsSync('portfolio.yaml')) {
     const portfolio = new Portfolio('portfolio');
     portfolio.publish('public-site');
-  } else if (fs.existsSync('course.md')) {    futils.copyFolder('./views/assets', './standalone-site');
+  } else if (fs.existsSync('course.md')) {
     const course = new Course('course');
     course.publish('public-site', false);
     if (program.private) {
