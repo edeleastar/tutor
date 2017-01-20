@@ -16,7 +16,7 @@ class Course extends LearningObject {
     this.credits = futils.getCredits();
     this.url = futils.getCourseUrl();
     const ignoreTopics = futils.getIgnoreList();
-    if (!ignoreOff) {
+    if (ignoreTopics && !ignoreOff) {
       this.topics = this.topics.filter(topic => ignoreTopics.indexOf(topic.folder) < 0);
     }
   }

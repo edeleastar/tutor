@@ -10,10 +10,16 @@ module.exports.parse = function (fileName) {
 };
 
 module.exports.parseWithoutHeader = function (fileName) {
-  var array = fs.readFileSync(fileName).toString().split('\n');
-  array.shift();
-  var res = array.join('');
-  return marked(res);
+  var content = fs.readFileSync(fileName).toString();
+  const line1 = content.indexOf('\n');
+  content = content.substring(line1 + 1, content.length);
+  content = content.trim();
+  const line2 = content.indexOf('\n');
+  if (line2 > -1) {
+    content = content.substring(0, line2);
+  }
+
+  return marked(content);
 };
 
 module.exports.getHeader = function (fileName) {

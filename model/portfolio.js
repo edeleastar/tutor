@@ -22,7 +22,7 @@ class Portfolio extends LearningObject {
         if (fs.existsSync(module)) {
           console.log('- ' + module);
           sh.cd(module);
-          const course = new Course('course');
+          const course = new Course('course', false);
           if (course) courseGroup.courses.push(course);
           sh.cd('..');
         } else {

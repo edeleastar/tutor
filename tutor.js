@@ -58,7 +58,7 @@ function inferCommand() {
     const portfolio = new Portfolio('portfolio');
     portfolio.publish('public-site');
   } else if (fs.existsSync('course.md')) {
-    const course = new Course('course');
+    const course = new Course('course', false);
     course.publish('public-site', false);
     if (program.private) {
       const privateCourse = new Course('course', true);
