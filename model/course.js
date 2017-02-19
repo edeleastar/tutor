@@ -15,6 +15,10 @@ class Course extends LearningObject {
     this.topics = this.harvestTopics(glob.sync('topic*').sort());
     this.credits = futils.getCredits();
     this.url = futils.getCourseUrl();
+    if (this.url && this.url[this.url.length - 1] != '/') {
+      this.url += '/';
+    }
+
     const ignoreTopics = futils.getIgnoreList();
     if (ignoreTopics && !ignoreOff) {
       this.topics = this.topics.filter(topic => ignoreTopics.indexOf(topic.folder) < 0);
