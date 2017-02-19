@@ -24,7 +24,7 @@ program.arguments('<file>')
     .version(version)
     .option('-p, --private', 'Generate full private site')
     .option('-n, --new', 'Create a template course')
-    .option('-s, --standalone', 'Generate standalons site')
+    .option('-s, --standalone', 'Generate standalone site')
     .parse(process.argv);
 
 if (program.new) {

@@ -11,6 +11,14 @@ Here is a portfolio of courses:
 
 - <https://wit-tutors.github.io/modules>
 
+Here is a course on using tutors:
+
+- <https://wit-tutors.github.io/tutors-course>
+
+This course was developed using tutors - the course 'source' is here:
+
+- <https://github.com/wit-tutors/tutors-course-src>
+
 ## Quick Start
 
 Make sure you have node.js installed. 
@@ -38,7 +46,8 @@ tutors new
 This will create a new course, populated with some template talks, resources and labs. To build the course, enter the following:
 
 ~~~
-cd tutors-starter
+cd tutors-starter-0
+
 tutors
 ~~~
 
@@ -79,72 +88,56 @@ The structure of the site follows a set of filename and folder nested convention
 
 Labs are step by step instructions focused on a specific task. Talks are simple pdf presentations. Topics are collections of talks and labs.
 
-## Installation
-
-First install the latest node.js:
-
-- <https://nodejs.org>
-
-Then, use the standard npm install command:
-
-~~~
-npm install tutors -g
-~~~
-
-Note: on some older windows systems, if the above gives an error, then you may need to use a slightly extended command:
-
-~~~
-npm install tutors -g --no-optional
-~~~
-
 ## Commands
 
-The above will install `tutor` as a command. To test it out, clone a sample course web:
+To explore some of the options, clone this course first:
 
 ~~~
-git clone https://github.com/edeleastar/tutor-example-course.git
+git clone https://github.com/wit-tutors/tutors-course-src.git
 ~~~
 
 Change into the folder containing the cloned repo and run `tutor`:
 
 ~~~
-cd tutor-example-course
+cd tutors-course-src
 tutors
 ~~~
 
 If all goes smoothly, you should see on the console a list of the topics as they are generated for the sample course:
 
 ~~~
-Introducing HTML
+tutors course web generator: 1.4.1
+ Setup
  Talks:
-  -->The Nature of the Web
-  -->HTML Basics
+  -->Introducing Tutors
+  -->Tutors Course Structure
  Labs:
-  -->Lab-00
-  -->Lab-01
-Introducing CSS
+  -->Lab-01-Setup
+ Composition
  Talks:
-  -->HTML Elements
-  -->CSS Fundamentals
-  -->CSS Selectors
+  -->Composing Labs
  Labs:
-  -->Lab-02
-Box Model
+  -->Lab-02-Composition
+ Publishing
  Talks:
-  -->The Evolution of the Web
-  -->Box Fundamentals
-  -->Multicolumn Layout
-  -->Project 1 Specification
+  -->Publishing to Github & Moodle
  Labs:
-  -->Lab-03a
-  -->Lab-03b
-    ...
-    ....
-  ~~~
+  -->Lab-03-Publish
+  -->Lab-04-Moodle
+ Portfolios
+ Talks:
+  -->Portfolios
+ Labs:
+  -->Lab-05-Portfolio
+ Git
+ Labs:
+  -->Lab-06-Git Introduction
+  -->Lab-07-Branching and Merging
+~~~
 
 The site will be generated into a folder called `public-site` in the same folder. If you open `index.html` in there you should see this site, generated locally:
 
- - <http://edeleastar.github.io/tutor-example-site>
+- <https://wit-tutors.github.io/tutors-course>
 
 The `tutors` command is context sensetive, so will build the complete course if run from the top level, a single topic (with all its talks and labs) if run from within a topic folder, and it will build a single book/lab if run from in a book folder.
 
@@ -243,6 +236,21 @@ These work in tandem to facilitate content embedding. `indexmoodle.html` is a pa
 
 The above mechanism requires you to provide the url of the hosted course web - as the url is stitched into both files by tutor. You provide this in a file called 'courseurl' in the root folder of the course. See the example above for this procedure in action.
 
-## 1.0.3 Update
+## Options
 
-Talks can now be a simple zip file (+ .md and .png files). This can be useful for distributing documents, templates or other assets.
+### Private
+
+~~~
+tutors -p
+~~~
+
+This will generate the course web to a `private-site` folder as well as `public-site`. The private version does not process the mbignore file, and will alsways generate the complete course. This can be useful if you are selectivtly publishing a course (to public-site), but want to keep a full version locally.
+
+### Standalone
+
+This will generate the course web to a `standalone-site` folder as well as `public-site`. This version includes the full CSS + font assets. These are loaded from CDNs by the public version. This can be useful if you want to distrubute a course to be browsed on a device completely offline.
+
+~~~
+tutors -s
+~~~
+
