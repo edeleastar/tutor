@@ -148,7 +148,7 @@ In the root folder of a course web, there are a few general files:
 ~~~
 ├── course.md: high level summary of course
 ├── credits: list of contributors
-├── mbignore: list topics to include from the course web
+├── mbignore: list topics to exclude from the course web
 ~~~
 
 The remainder is the `topics` folders:
@@ -238,6 +238,8 @@ The above mechanism requires you to provide the url of the hosted course web - a
 
 ## Options
 
+The mbignore file can contain a list of topics that you wish to **exclude** from the course web. For instance, you may be rolling over a course from a previous run. This enables you to leave the course source intact, and selectively generate topics week by week.
+
 ### Private
 
 ~~~
@@ -248,9 +250,10 @@ This will generate the course web to a `private-site` folder as well as `public-
 
 ### Standalone
 
-This will generate the course web to a `standalone-site` folder as well as `public-site`. This version includes the full CSS + font assets. These are loaded from CDNs by the public version. This can be useful if you want to distrubute a course to be browsed on a device completely offline.
-
 ~~~
 tutors -s
 ~~~
+
+This will generate the course web to a `standalone-site` folder as well as `public-site`. This version includes the full CSS + font assets. These are loaded from CDNs by the public version. This can be useful if you want to distrubute a course to be browsed on a device completely offline.
+
 
