@@ -1,5 +1,9 @@
 {% macro card (type, contentLink, imgLink, title, objectives, extra) %}
+  {% if (type == "film") %}
+  <a class="ui raised link card" href="{{contentLink}}" target="_blank">
+  {% else %}
   <a class="ui raised link card" href="{{contentLink}}">
+  {% endif %}
     <div class="content">
         <div class="right floated meta"> <i class="{{type}} large icon"></i></div>
         <div class="header"> {{title}} </div>

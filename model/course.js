@@ -40,6 +40,7 @@ class Course extends LearningObject {
     if (!fs.existsSync(path)) {
       sh.mkdir(path);
     }
+
     this.standalone = standalone;
     this.publishWalls(path);
     this.topics.forEach(topic => {
