@@ -25,11 +25,15 @@ program.arguments('<file>')
     .option('-p, --private', 'Generate full private site')
     .option('-n, --new', 'Create a template course')
     .option('-s, --standalone', 'Generate standalone site')
+    .option('-t, --templates', 'Emit templates & stylesheets')
     .parse(process.argv);
 
 if (program.new) {
   versionCmd();
   newCmd();
+} else if (program.templates) {
+  console.log('Emitting templates and stylsheets to ./style folder');
+  futils.copyFolder(`${root}/views/*`, './style');
 } else {
   versionCmd();
   inferCommand();
@@ -54,6 +58,12 @@ function newCmd() {
 }
 
 function inferCommand() {
+  if (fs.existsSync('style')) {
+    console.log('style detected');
+    const path = futils.getCurrentDirectory().toString() + '/style';
+    console.log(path);
+    nunjucks.configure(path, { autoescape: false });
+  }
   if (fs.existsSync('portfolio.yaml')) {
     const portfolio = new Portfolio('portfolio');
     portfolio.publish('public-site');
