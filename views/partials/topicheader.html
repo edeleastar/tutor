@@ -1,5 +1,6 @@
-{% macro topicheader(parent, icon, title, subtitle, credits) %}
+{% macro topicheader(parent, icon, title, subtitle, credits, gitterid) %}
 
+{% import "partials/gitterbadge.html" as gitterbadge %}
 {% import "headelements/walllinks.html" as walllinks %}
 {% import "headelements/topics.html" as topics %}
 {% import "headelements/creditsmsg.html" as creditsmsg %}
@@ -8,13 +9,19 @@
 
     {% include "headelements/sidebarlink.html" %}
 
-    <div class="seven wide center aligned column">
-      <h2> {{title}} </h2>
-      <p> Single Topic </p>
+    <div class="ui seven wide center aligned column grid">
+      <div class="ui row">
+        <h2> {{title}} </h2>
+      </div>
+      <div class="ui row">
+        {% if gitterid %}
+        {{ gitterbadge.gitterbadge(gitterid) }}
+        {% endif %}
+      </div>
     </div>
 
     {{ topics.topics ("../index.html") }}
-    {{ creditsmsg.creditsmsg(credits) }}
+    {{ creditsmsg.creditsmsg(credits, gitterid) }}
     {{ walllinks.walllinks ("../talkwall.html", "../labwall.html") }}
 
   </header>

@@ -11,6 +11,7 @@ class LearningObject {
   constructor(pattern) {
     this.folder = path.basename(process.cwd());
     this.img = futils.getImageFile(pattern);
+    this.gitterid = futils.getGitterId();
     this.link = 'index.html';
     if (fs.existsSync(pattern + '.md')) {
       this.title = mdutils.getHeader(pattern + '.md');

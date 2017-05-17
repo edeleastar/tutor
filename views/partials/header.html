@@ -1,5 +1,6 @@
-{% macro header(parent, type, title, subtitle, credits, portfolio) %}
+{% macro header(parent, type, title, subtitle, credits, portfolio, gitterid) %}
 
+{% import "partials/gitterbadge.html" as gitterbadge %}
 {% import "headelements/walllinks.html" as walllinks %}
 {% import "headelements/topics.html" as topics %}
 {% import "headelements/portfoliolink.html" as portfoliolink %}
@@ -9,11 +10,16 @@
 
   {% include "headelements/sidebarlink.html" %}
 
-  <div class="seven wide center aligned column">
-    <h2 class="headder"> {{title}}</h2>
-    <p> Top Level Topics </p>
+  <div class="ui seven wide center aligned column grid">
+    <div class="ui row">
+      <h2> {{title}} </h2>
+    </div>
+    <div class="ui row">
+      {% if gitterid %}
+      {{ gitterbadge.gitterbadge(gitterid) }}
+      {% endif %}
+    </div>
   </div>
-
 
   {% if portfolio %}
     {{ portfoliolink.portfoliolink ("../index.html") }}

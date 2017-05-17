@@ -150,3 +150,16 @@ module.exports.getCredits = function () {
   else
     return '';
 };
+
+module.exports.getGitterId = function () {
+  if (fs.existsSync('gitter'))
+    return readFile('gitter');
+  else if (fs.existsSync('../gitter'))
+    return readFile('../gitter');
+  else if (fs.existsSync('../../gitter'))
+    return readFile('../../gitter');
+  else if (fs.existsSync('../../../gitter'))
+    return readFile('../../../gitter');
+  else
+    return '';
+};

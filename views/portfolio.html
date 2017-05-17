@@ -23,7 +23,7 @@
       <div class="ui stackable cards">
         {% for course in courseGroup.courses %}
         {{ card.card ("sitemap", "./" + course.folder + "/index.html", "./" + course.folder + "/" + course.img,
-        course.title, course.objectivesWithoutHeader, course.credits) }}
+        course.title, course.objectivesWithoutHeader, course.credits, course.gitterid) }}
         {% endfor %}
       </div>
     </div>
@@ -39,7 +39,7 @@
   <div class="ui centered stackable cards">
     {% for course in courseGroup.courses %}
     {{ card.card ("sitemap", "./" + course.folder + "/index.html", "./" + course.folder + "/" + course.img,
-    course.title, course.objectivesWithoutHeader, course.credits) }}
+    course.title, course.objectivesWithoutHeader, course.credits, course.gitterid) }}
     {% endfor %}
   </div>
 </div>

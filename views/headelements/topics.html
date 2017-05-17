@@ -1,4 +1,7 @@
-{% macro topics(link) %}
+{% macro topics(link, gitterid) %}
+
+{% import "partials/gitterbadge.html" as gitterbadge %}
+
 <div class="two wide column sitemap">
   <div class="popup" data-content="To the top level Topics for this Module...">
     <a href="{{link}}"> <i class="huge home icon"></i> Module </a>

@@ -1,4 +1,5 @@
 {% set assetprefix = "../../assets" %}
+{% import "partials/gitterbadge.html" as gitterbadge %}
 
 {% extends "main.html" %}
 {% block content %}
@@ -7,7 +8,7 @@
   {% include "css/lab.css" %}
 </style>
 
-<div class="ui fixed top pointing inverted menu labmenu">
+<div class="ui fixed top pointing inverted stackable menu labmenu">
   <header class="header item">
     <i id="toc" class="sitemap icon"></i>
     <a href="../index.html">
@@ -20,9 +21,11 @@
       {{chapter.shortTitle}}
     </a>
     {% endfor %}
-    <a class="item" href="../../index.html">
-      <i class="home icon"></i>
-    </a>
+    <div class="item">
+      {% if gitterid %}
+      {{ gitterbadge.gitterbadge(topic.gitterid) }}
+      {% endif %}
+    </div>
   </div>
 </div>
 
