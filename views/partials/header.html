@@ -1,6 +1,7 @@
 {% macro header(parent, type, title, subtitle, credits, portfolio, gitterid) %}
 
 {% import "partials/gitterbadge.html" as gitterbadge %}
+{% import "partials/gittersidecar.html" as gittersidecar %}
 {% import "headelements/walllinks.html" as walllinks %}
 {% import "headelements/topics.html" as topics %}
 {% import "headelements/portfoliolink.html" as portfoliolink %}
@@ -31,4 +32,8 @@
 
 
 </header>
+
+{{ gittersidecar.gittersidecar(gitterid) }}
+
+
 {% endmacro %}

@@ -1,0 +1,12 @@
+{% import "partials/gittersidecar.html" as gittersidecar %}
+<!DOCTYPE html>
+<html>
+  <head>
+  </head>
+  <body>
+    <iframe src="index.html" style="position:fixed; top:0px; left:0px; bottom:0px; right:0px; width:100%; height:100%; border:none; margin:0; padding:0; overflow:hidden;">
+      Your browser doesn't support iframes
+    </iframe>
+    {{gittersidecar.gittersidecar(gitterid)}}
+  </body>
+</html>

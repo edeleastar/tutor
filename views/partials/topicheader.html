@@ -1,6 +1,7 @@
 {% macro topicheader(parent, icon, title, subtitle, credits, gitterid) %}
 
 {% import "partials/gitterbadge.html" as gitterbadge %}
+{% import "partials/gittersidecar.html" as gittersidecar %}
 {% import "headelements/walllinks.html" as walllinks %}
 {% import "headelements/topics.html" as topics %}
 {% import "headelements/creditsmsg.html" as creditsmsg %}
@@ -25,4 +26,8 @@
     {{ walllinks.walllinks ("../talkwall.html", "../labwall.html") }}
 
   </header>
+
+
+{{ gittersidecar.gittersidecar(gitterid) }}
+
 {% endmacro %}

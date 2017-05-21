@@ -1,5 +1,6 @@
 {% import "partials/portfolioheader.html" as header %}
 {% import "partials/card.html" as card %}
+{% import "partials/gittersidecar.html" as gittersidecar %}
 
 {% extends "main.html" %}
 {% block content %}
@@ -23,7 +24,7 @@
       <div class="ui stackable cards">
         {% for course in courseGroup.courses %}
         {{ card.card ("sitemap", "./" + course.folder + "/index.html", "./" + course.folder + "/" + course.img,
-        course.title, course.objectivesWithoutHeader, course.credits, course.gitterid) }}
+        course.title, course.objectivesWithoutHeader, course.credits) }}
         {% endfor %}
       </div>
     </div>
@@ -39,13 +40,14 @@
   <div class="ui centered four stackable cards">
     {% for course in courseGroup.courses %}
     {{ card.card ("sitemap", "./" + course.folder + "/index.html", "./" + course.folder + "/" + course.img,
-    course.title, course.objectivesWithoutHeader, course.credits, course.gitterid) }}
+    course.title, course.objectivesWithoutHeader, course.credits) }}
     {% endfor %}
   </div>
 </div>
 {% endfor %}
 
-
 {% endif %}
+
+{{ gittersidecar.gittersidecar(gitterid) }}
 
 {% endblock %}

@@ -1,7 +1,7 @@
 {% set assetprefix = "../../assets" %}
 {% import "partials/gitterbadge.html" as gitterbadge %}
-
 {% extends "main.html" %}
+
 {% block content %}
 
 <style>
@@ -29,7 +29,8 @@
   </div>
 </div>
 
-<div class="ui segment pushable">
+<div class="ui segment pushable" >
+
   <div class="ui inverted labeled icon left inline vertical sidebar menu">
     {% for resource in course.allLabs.resources %}
       {% if resource.title == title %}
@@ -44,7 +45,7 @@
     {% endfor %}
   </div>
   <div class="pusher" tabindex="-1">
-    <div class="ui basic segment">
+    <div class="ui basic segment" id="labchat">
       <br>
       {% for chapter in chapters %}
       <div  class="ui tab segment lab" data-tab="{{chapter.shortTitle}}">
@@ -52,11 +53,15 @@
       </div>
      {% endfor %}
     </div>
+
   </div>
+
 </div>
-{% include "partials/labcredits.html" %}
+<!--{% include "partials/labcredits.html" %}-->
 
 <script>
   {% include "js/lab.js" %}
 </script>
+
+
 {% endblock %}

@@ -65,6 +65,7 @@ class Lab extends LearningObject {
     });
     this.course = course;
     futils.writeFile(path + '/index.html', nunjucks.render('lab.html', this));
+    futils.writeFile(path + '/indexchat.html', nunjucks.render('labwithchat.html', this));
     if (this.pages) {
       this.pages.forEach(page => {
         const fileName = '/' + page.file.substr(0, page.file.lastIndexOf('.')) + '.html';
