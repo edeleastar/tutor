@@ -163,3 +163,11 @@ module.exports.getGitterId = function () {
   else
     return '';
 };
+
+
+module.exports.getVideoId = function () {
+  if (fs.existsSync('videoid'))
+    return readFile('videoid');
+  else
+    return '';
+};

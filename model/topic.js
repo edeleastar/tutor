@@ -9,12 +9,14 @@ const futils = require('./../utils/futils');
 const LearningObject = require('./learningobject.js').LearningObject;
 const Talk = require('./talk.js').Talk;
 const Lab = require('./lab.js').Lab;
+const Video = require('./video.js').Video;
 
 class Topic extends LearningObject {
   constructor(pattern) {
     super(pattern);
     this.talks = this.harvestTalks(glob.sync('talk*').sort());
     this.labs = this.harvestLabs(glob.sync('book*').sort());
+    this.videos = this.harvestVideos(glob.sync('video*').sort());
     this.credits = futils.getCredits();
     this.url = futils.getCourseUrl();
     this.folder = futils.getCurrentFolder();
@@ -43,11 +45,23 @@ class Topic extends LearningObject {
     return labs;
   }
 
+  harvestVideos(videoList) {
+    const videos = [];
+    videoList.forEach(videoName => {
+      sh.cd(videoName);
+      const video = new Video(videoName);
+      if (video) videos.push(video);
+      sh.cd('..');
+    });
+    return videos;
+  }
+
   publish(path, course) {
     const basePath = '../' + path + '/' + this.folder;
     this.standalone = course.standalone;
     futils.initEmptyPath(basePath);
 
+    //const talks = this.videos.concat(this.talks);
     this.resources = this.talks.concat(this.labs);
     futils.copyFileToFolder(this.img, basePath);
     futils.writeFile(basePath + '/index.html', nunjucks.render('topic.html', this));

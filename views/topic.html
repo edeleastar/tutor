@@ -27,6 +27,11 @@
   <div class="pusher">
     <div class="ui container">
       <div class="ui basic segment">
+          {% if (videos.length > 0) %}
+          <div class="ui embed segment">
+            <div class="ui embed" data-source="youtube" data-id="{{videos[0].videoid}}"></div>
+          </div>
+          {% endif %}
         <div class="ui four doubling stackable cards">
           {% for resource in resources %}
           {{ card.card (resource.icon,
