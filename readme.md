@@ -139,7 +139,7 @@ The site will be generated into a folder called `public-site` in the same folder
 
 - <https://wit-tutors.github.io/tutors-course>
 
-The `tutors` command is context sensetive, so will build the complete course if run from the top level, a single topic (with all its talks and labs) if run from within a topic folder, and it will build a single book/lab if run from in a book folder.
+The `tutors` command is context sensitive, so will build the complete course if run from the top level, a single topic (with all its talks and labs) if run from within a topic folder, and it will build a single book/lab if run from in a book folder.
 
 ## Course Web Source File Structure
 
