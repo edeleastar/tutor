@@ -141,7 +141,7 @@ The site will be generated into a folder called `public-site` in the same folder
 
 The `tutors` command is context sensetive, so will build the complete course if run from the top level, a single topic (with all its talks and labs) if run from within a topic folder, and it will build a single book/lab if run from in a book folder.
 
-##Course Web Source File Structure
+## Course Web Source File Structure
 
 In the root folder of a course web, there are a few general files:
 
@@ -246,7 +246,7 @@ The mbignore file can contain a list of topics that you wish to **exclude** from
 tutors -p
 ~~~
 
-This will generate the course web to a `private-site` folder as well as `public-site`. The private version does not process the mbignore file, and will alsways generate the complete course. This can be useful if you are selectivtly publishing a course (to public-site), but want to keep a full version locally.
+This will generate the course web to a `private-site` folder as well as `public-site`. The private version does not process the mbignore file, and will always generate the complete course. This can be useful if you are selectively publishing a course (to public-site), but want to keep a full version locally.
 
 ### Standalone
 
@@ -254,6 +254,6 @@ This will generate the course web to a `private-site` folder as well as `public-
 tutors -s
 ~~~
 
-This will generate the course web to a `standalone-site` folder as well as `public-site`. This version includes the full CSS + font assets. These are loaded from CDNs by the public version. This can be useful if you want to distrubute a course to be browsed on a device completely offline.
+This will generate the course web to a `standalone-site` folder as well as `public-site`. This version includes the full CSS + font assets. These are loaded from CDNs by the public version. This can be useful if you want to distribute a course to be browsed on a device completely offline.
 
 
